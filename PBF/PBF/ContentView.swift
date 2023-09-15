@@ -12,6 +12,7 @@ struct ContentView: View {
         VStack {
             Text("Esse vai ser o app de bolsa familia mais pika de todos")
                 .multilineTextAlignment(.center)
+            Text( "Pode ter certeza!")
         }
         .padding()
     }
