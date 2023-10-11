@@ -21,6 +21,17 @@
 		3B59C0CE2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CD2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		3B59C0D02AD6C3E8006C86CF /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CF2AD6C3E8006C86CF /* FirebaseAppCheck */; };
 		3B59C0D22AD6C61B006C86CF /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59C0D12AD6C61B006C86CF /* Teste.swift */; };
+		19ADF1A12AD615E4000B0F2A /* BarracaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1A02AD615E4000B0F2A /* BarracaCard.swift */; };
+		19ADF1A42AD6163D000B0F2A /* PBFButtonSyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1A32AD6163D000B0F2A /* PBFButtonSyle.swift */; };
+		19ADF1A72AD61A0D000B0F2A /* ChooseAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1A62AD61A0D000B0F2A /* ChooseAccountView.swift */; };
+		19ADF1A92AD61A73000B0F2A /* CreateClientAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1A82AD61A73000B0F2A /* CreateClientAccountView.swift */; };
+		19ADF1AB2AD61D97000B0F2A /* LoginClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1AA2AD61D97000B0F2A /* LoginClientView.swift */; };
+		19ADF1AD2AD622DF000B0F2A /* FeirasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1AC2AD622DF000B0F2A /* FeirasView.swift */; };
+		19ADF1AF2AD62453000B0F2A /* LoginFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1AE2AD62453000B0F2A /* LoginFeiranteView.swift */; };
+		19ADF1B12AD62BFE000B0F2A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1B02AD62BFE000B0F2A /* CartView.swift */; };
+		19ADF1B32AD62C4D000B0F2A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1B22AD62C4D000B0F2A /* ProfileView.swift */; };
+		19ADF1B82AD6B6F9000B0F2A /* Oferta-do-Dia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19ADF1B72AD6B6F9000B0F2A /* Oferta-do-Dia.ttf */; };
+		19ADF1BB2AD6C079000B0F2A /* BarracaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19ADF1BA2AD6C079000B0F2A /* BarracaModel.swift */; };
 		3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D22AB1EF750047FCE4 /* PBFApp.swift */; };
 		3B7570D52AB1EF750047FCE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D42AB1EF750047FCE4 /* ContentView.swift */; };
 		3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D62AB1EF760047FCE4 /* Assets.xcassets */; };
@@ -38,6 +49,18 @@
 		3B59C0C22AD6C07A006C86CF /* Cliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cliente.swift; sourceTree = "<group>"; };
 		3B59C0C52AD6C335006C86CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		3B59C0D12AD6C61B006C86CF /* Teste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
+		19ADF1A02AD615E4000B0F2A /* BarracaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarracaCard.swift; sourceTree = "<group>"; };
+		19ADF1A32AD6163D000B0F2A /* PBFButtonSyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFButtonSyle.swift; sourceTree = "<group>"; };
+		19ADF1A62AD61A0D000B0F2A /* ChooseAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAccountView.swift; sourceTree = "<group>"; };
+		19ADF1A82AD61A73000B0F2A /* CreateClientAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientAccountView.swift; sourceTree = "<group>"; };
+		19ADF1AA2AD61D97000B0F2A /* LoginClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClientView.swift; sourceTree = "<group>"; };
+		19ADF1AC2AD622DF000B0F2A /* FeirasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeirasView.swift; sourceTree = "<group>"; };
+		19ADF1AE2AD62453000B0F2A /* LoginFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeiranteView.swift; sourceTree = "<group>"; };
+		19ADF1B02AD62BFE000B0F2A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		19ADF1B22AD62C4D000B0F2A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		19ADF1B52AD63348000B0F2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		19ADF1B72AD6B6F9000B0F2A /* Oferta-do-Dia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oferta-do-Dia.ttf"; sourceTree = "<group>"; };
+		19ADF1BA2AD6C079000B0F2A /* BarracaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarracaModel.swift; sourceTree = "<group>"; };
 		3B7570CF2AB1EF750047FCE4 /* PBF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7570D22AB1EF750047FCE4 /* PBFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFApp.swift; sourceTree = "<group>"; };
 		3B7570D42AB1EF750047FCE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,16 +99,54 @@
 			isa = PBXGroup;
 			children = (
 				3B59C0C22AD6C07A006C86CF /* Cliente.swift */,
+		19ADF19F2AD615B7000B0F2A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				19ADF1A02AD615E4000B0F2A /* BarracaCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		19ADF1A22AD615EC000B0F2A /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				19ADF1A32AD6163D000B0F2A /* PBFButtonSyle.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		19ADF1A52AD619E8000B0F2A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B7570D42AB1EF750047FCE4 /* ContentView.swift */,
+				19ADF1AC2AD622DF000B0F2A /* FeirasView.swift */,
+				19ADF1B02AD62BFE000B0F2A /* CartView.swift */,
+				19ADF1B22AD62C4D000B0F2A /* ProfileView.swift */,
+				19ADF1A62AD61A0D000B0F2A /* ChooseAccountView.swift */,
+				19ADF1A82AD61A73000B0F2A /* CreateClientAccountView.swift */,
+				19ADF1AA2AD61D97000B0F2A /* LoginClientView.swift */,
+				19ADF1AE2AD62453000B0F2A /* LoginFeiranteView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		19ADF1B42AD63144000B0F2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19ADF1BA2AD6C079000B0F2A /* BarracaModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
 		3B59C0C42AD6C328006C86CF /* ViewModel */ = {
+		19ADF1B62AD6B6E8000B0F2A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				3B59C0C52AD6C335006C86CF /* ViewModel.swift */,
+				19ADF1B72AD6B6F9000B0F2A /* Oferta-do-Dia.ttf */,
 			);
 			path = ViewModel;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		3B7570C62AB1EF750047FCE4 = {
@@ -109,11 +170,17 @@
 		3B7570D12AB1EF750047FCE4 /* PBF */ = {
 			isa = PBXGroup;
 			children = (
+				19ADF1B62AD6B6E8000B0F2A /* Fonts */,
+				19ADF1B52AD63348000B0F2A /* Info.plist */,
 				3B7570D22AB1EF750047FCE4 /* PBFApp.swift */,
 				3B59C0C42AD6C328006C86CF /* ViewModel */,
 				3B59C0C12AD6C063006C86CF /* Model */,
 				3B7570D42AB1EF750047FCE4 /* ContentView.swift */,
 				3B59C0D12AD6C61B006C86CF /* Teste.swift */,
+				19ADF1B42AD63144000B0F2A /* Model */,
+				19ADF1A52AD619E8000B0F2A /* Views */,
+				19ADF19F2AD615B7000B0F2A /* Components */,
+				19ADF1A22AD615EC000B0F2A /* Style */,
 				3B7570D62AB1EF760047FCE4 /* Assets.xcassets */,
 				3B7570D82AB1EF760047FCE4 /* Preview Content */,
 			);
@@ -218,6 +285,7 @@
 				3B7570DA2AB1EF760047FCE4 /* Preview Assets.xcassets in Resources */,
 				3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */,
 				3B59C0B32AD6BF51006C86CF /* GoogleService-Info.plist in Resources */,
+				19ADF1B82AD6B6F9000B0F2A /* Oferta-do-Dia.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,11 +296,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19ADF1B12AD62BFE000B0F2A /* CartView.swift in Sources */,
+				19ADF1AF2AD62453000B0F2A /* LoginFeiranteView.swift in Sources */,
+				19ADF1BB2AD6C079000B0F2A /* BarracaModel.swift in Sources */,
 				3B7570D52AB1EF750047FCE4 /* ContentView.swift in Sources */,
+				19ADF1AB2AD61D97000B0F2A /* LoginClientView.swift in Sources */,
+				19ADF1A92AD61A73000B0F2A /* CreateClientAccountView.swift in Sources */,
+				19ADF1A12AD615E4000B0F2A /* BarracaCard.swift in Sources */,
+				19ADF1A72AD61A0D000B0F2A /* ChooseAccountView.swift in Sources */,
 				3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */,
 				3B59C0C62AD6C335006C86CF /* ViewModel.swift in Sources */,
 				3B59C0D22AD6C61B006C86CF /* Teste.swift in Sources */,
 				3B59C0C32AD6C07A006C86CF /* Cliente.swift in Sources */,
+				19ADF1A42AD6163D000B0F2A /* PBFButtonSyle.swift in Sources */,
+				19ADF1B32AD62C4D000B0F2A /* ProfileView.swift in Sources */,
+				19ADF1AD2AD622DF000B0F2A /* FeirasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +442,7 @@
 				DEVELOPMENT_TEAM = 6S6995TY46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PBF/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -393,6 +472,7 @@
 				DEVELOPMENT_TEAM = 6S6995TY46;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PBF/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
