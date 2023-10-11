@@ -12,8 +12,9 @@ struct FeirasView: View {
         NavigationStack {
             ScrollView {
                 VStack{
-                    Text("Hola, que tal??")
+                    BarracaCard()
                 }
+                .padding()
             }
             .navigationTitle("Feira")
         }
