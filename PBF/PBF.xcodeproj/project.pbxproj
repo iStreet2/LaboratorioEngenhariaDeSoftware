@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE4D2AD6DCD400B8D895 /* BarracaCard.swift */; };
+		3B17CE532AD6DD3600B8D895 /* PBFButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE522AD6DD3600B8D895 /* PBFButtonStyle.swift */; };
+		3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE552AD6DD7C00B8D895 /* CartView.swift */; };
+		3B17CE582AD6DD9000B8D895 /* ChooseAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE572AD6DD9000B8D895 /* ChooseAccountView.swift */; };
+		3B17CE5A2AD6DDA200B8D895 /* CreateClientAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE592AD6DDA200B8D895 /* CreateClientAccountView.swift */; };
+		3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */; };
+		3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */; };
+		3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */; };
+		3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */; };
+		3B17CE642AD6DDFF00B8D895 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B17CE632AD6DDFF00B8D895 /* Info.plist */; };
 		3B59C0B32AD6BF51006C86CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B59C0B22AD6BF51006C86CF /* GoogleService-Info.plist */; };
 		3B59C0B62AD6BFAD006C86CF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0B52AD6BFAD006C86CF /* FirebaseAnalytics */; };
 		3B59C0B82AD6BFAD006C86CF /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0B72AD6BFAD006C86CF /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -34,6 +44,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B17CE4D2AD6DCD400B8D895 /* BarracaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarracaCard.swift; sourceTree = "<group>"; };
+		3B17CE502AD6DD1200B8D895 /* Oferta-do-Dia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oferta-do-Dia.ttf"; sourceTree = "<group>"; };
+		3B17CE522AD6DD3600B8D895 /* PBFButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFButtonStyle.swift; sourceTree = "<group>"; };
+		3B17CE552AD6DD7C00B8D895 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		3B17CE572AD6DD9000B8D895 /* ChooseAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAccountView.swift; sourceTree = "<group>"; };
+		3B17CE592AD6DDA200B8D895 /* CreateClientAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClientAccountView.swift; sourceTree = "<group>"; };
+		3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeirasView.swift; sourceTree = "<group>"; };
+		3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClientView.swift; sourceTree = "<group>"; };
+		3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeiranteView.swift; sourceTree = "<group>"; };
+		3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3B17CE632AD6DDFF00B8D895 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B59C0B22AD6BF51006C86CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B59C0C22AD6C07A006C86CF /* Cliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cliente.swift; sourceTree = "<group>"; };
 		3B59C0C52AD6C335006C86CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -72,6 +93,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B17CE4C2AD6DCC600B8D895 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE4D2AD6DCD400B8D895 /* BarracaCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3B17CE4F2AD6DCEC00B8D895 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE502AD6DD1200B8D895 /* Oferta-do-Dia.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3B17CE512AD6DD1F00B8D895 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE522AD6DD3600B8D895 /* PBFButtonStyle.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		3B17CE542AD6DD6200B8D895 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B7570D42AB1EF750047FCE4 /* ContentView.swift */,
+				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
+				3B17CE572AD6DD9000B8D895 /* ChooseAccountView.swift */,
+				3B17CE592AD6DDA200B8D895 /* CreateClientAccountView.swift */,
+				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
+				3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */,
+				3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */,
+				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3B59C0C12AD6C063006C86CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +153,7 @@
 			children = (
 				3B7570D12AB1EF750047FCE4 /* PBF */,
 				3B59C0B22AD6BF51006C86CF /* GoogleService-Info.plist */,
+				3B17CE632AD6DDFF00B8D895 /* Info.plist */,
 				3B7570D02AB1EF750047FCE4 /* Products */,
 				3B83F7612AD6D048004F4789 /* Frameworks */,
 			);
@@ -110,10 +171,13 @@
 			isa = PBXGroup;
 			children = (
 				3B7570D22AB1EF750047FCE4 /* PBFApp.swift */,
+				3B17CE4F2AD6DCEC00B8D895 /* Fonts */,
 				3B59C0C42AD6C328006C86CF /* ViewModel */,
 				3B59C0C12AD6C063006C86CF /* Model */,
-				3B7570D42AB1EF750047FCE4 /* ContentView.swift */,
 				3B59C0D12AD6C61B006C86CF /* Teste.swift */,
+				3B17CE542AD6DD6200B8D895 /* Views */,
+				3B17CE512AD6DD1F00B8D895 /* Style */,
+				3B17CE4C2AD6DCC600B8D895 /* Components */,
 				3B7570D62AB1EF760047FCE4 /* Assets.xcassets */,
 				3B7570D82AB1EF760047FCE4 /* Preview Content */,
 			);
@@ -215,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B17CE642AD6DDFF00B8D895 /* Info.plist in Resources */,
 				3B7570DA2AB1EF760047FCE4 /* Preview Assets.xcassets in Resources */,
 				3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */,
 				3B59C0B32AD6BF51006C86CF /* GoogleService-Info.plist in Resources */,
@@ -228,10 +293,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B17CE532AD6DD3600B8D895 /* PBFButtonStyle.swift in Sources */,
 				3B7570D52AB1EF750047FCE4 /* ContentView.swift in Sources */,
+				3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */,
+				3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */,
+				3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */,
 				3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */,
+				3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */,
 				3B59C0C62AD6C335006C86CF /* ViewModel.swift in Sources */,
 				3B59C0D22AD6C61B006C86CF /* Teste.swift in Sources */,
+				3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */,
+				3B17CE5A2AD6DDA200B8D895 /* CreateClientAccountView.swift in Sources */,
+				3B17CE582AD6DD9000B8D895 /* ChooseAccountView.swift in Sources */,
+				3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */,
 				3B59C0C32AD6C07A006C86CF /* Cliente.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
