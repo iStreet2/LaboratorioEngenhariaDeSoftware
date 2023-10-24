@@ -1,16 +1,35 @@
 //
-//  CreateClientAccountView.swift
+//  CreateFeiranteAccountView.swift
 //  PBF
 //
-//  Created by Laura C. Balbachan dos Santos on 10/10/23.
+//  Created by Gabriel Vicentin Negro on 23/10/23.
 //
 
 import SwiftUI
+import CoreData
 
-struct CreateClientAccountView: View {
+struct CreateFeiranteAccountView: View {
     @State var nameInput: String = ""
     @State var emailInput: String = ""
+    @State var cpfInput: String = ""
     @State var passInput: String = ""
+    
+    @State var navigate = false
+    
+    @EnvironmentObject var vm: ViewModel
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
     
     var body: some View {
         NavigationView{
@@ -33,6 +52,14 @@ struct CreateClientAccountView: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
+                        Text("CPF/CNPJ")
+                            .foregroundStyle(.gray)
+                        TextField("", text: $emailInput)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
                         Text("Senha")
                             .foregroundStyle(.gray)
                         TextField("", text: $passInput)
@@ -43,20 +70,26 @@ struct CreateClientAccountView: View {
                             )
                     }
                     .padding()
+                    Spacer()
                     VStack{
                         NavigationLink("Criar Conta"){
                             ContentView()
                                 .navigationBarBackButtonHidden(true)
+                                .onAppear{ //Salvar dados no banco de dados
+                                    let feirante = Feirante(_) //PAREI AQUI, ONDE TENHO QUE CRIAR UMA VARIAVEL COM A INSTANCIA DO MEU FEIRANTE PARA CHAMAR A FUNCAO DA VIEWMODEL ADDFEIRANTE E MANDAR ELE PRO BANCO DE DADOS :)
+                                }
                         }
                         .buttonStyle(PBFButtonSyle())
                     }
+                    Spacer()
                 }
-                .navigationTitle("Cliente")
+                
+                .navigationTitle("Feirante")
             }
         }
     }
 }
 
 #Preview {
-    CreateClientAccountView()
+    CreateFeiranteAccountView(context: DataController().container.viewContext)
 }

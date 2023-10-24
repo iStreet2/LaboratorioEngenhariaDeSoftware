@@ -20,8 +20,7 @@ struct PBFButtonSyle: ButtonStyle {
 }
 
 #Preview {
-    Button("aaAAa") {
-        print("a")
+    Button("Criar Conta") {
     }
     .buttonStyle(PBFButtonSyle())
 }

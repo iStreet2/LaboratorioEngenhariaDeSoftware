@@ -21,13 +21,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct PBFApp: App {
     
+    @StateObject var vm = ViewModel()
+    @StateObject var dataController = DataController()
+    
     //Coisas do FireBase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var vm = ViewModel()
+    
     
     var body: some Scene {
         WindowGroup {
-            Teste()
+            ChooseAccountView(context: dataController.container.viewContext)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(vm)
         }
     }

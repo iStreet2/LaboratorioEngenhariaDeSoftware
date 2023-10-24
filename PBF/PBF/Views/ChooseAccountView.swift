@@ -6,31 +6,61 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ChooseAccountView: View {
+    @EnvironmentObject var vm: ViewModel
+    
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
+    
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Selecione o seu tipo de conta")
+            VStack {
+                Text("Por favor, selecione o tipo de conta que deseja realizar o login")
+                    .multilineTextAlignment(.center)
                     .foregroundStyle(Color.gray)
                 
                 // MARK: Conectar com o Firebase
                 // Botão para as views do feirante
                 NavigationLink("Feirante"){
-                    LoginFeiranteView()
+                    if myDataController.checkEmailFeirante(){ //Se eu ja tiver um email no CoreData, eu vou para a HomeView direto, se nao eu vou pro login
+                        HomeView()
+                    }else{
+                        LoginFeiranteView()
+                    }
                 }
                 .buttonStyle(PBFButtonSyle())
                 
                 // Botão para as views do cliente
                 NavigationLink("Cliente"){
-                    LoginClientView()
+                    if myDataController.checkEmailCliente(){ //Mesma logica anterior
+                        HomeView()
+                    }else{
+                        LoginClientView()
+                    }
                 }
                 .buttonStyle(PBFButtonSyle())
             }
+            .padding()
         }
+        
     }
 }
 
+
 #Preview {
-    ChooseAccountView()
+    ChooseAccountView(context: DataController().container.viewContext)
 }
+

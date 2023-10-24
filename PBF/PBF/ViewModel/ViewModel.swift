@@ -12,22 +12,84 @@ class ViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    func addCliente(cliente: Cliente) {
-        let _ = db.collection("clientes").addDocument(data: [
-            "nome": cliente.nome,
-            "email": cliente.email,
-            "telefone": cliente.telefone,
-            "senha": cliente.senha,
-            "predio": cliente.predio,
-            "apartamento": cliente.apartamento
-        ]) { err in
+    
+    
+    //Funções de Feirantes
+    
+    func fetchFeirantes(completion: @escaping ([Feirante]) -> ()) {
+        db.collection("feirantes").getDocuments() { (querySnapshot, err) in
             if let err = err {
-                print("Erro ao adicionar o cliente: \(err.localizedDescription)")
+                print("Erro ao obter feirantes: \(err)")
             } else {
-                print("Cliente adicionado com sucesso.")
+                var feirantes: [Feirante] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let feirante = Feirante(
+                        id: document.documentID,
+                        nome: data["nome"] as! String,
+                        email: data["email"] as! String,
+                        telefone: data["telefone"] as! String,
+                        senha: data["senha"] as! String,
+                        nomeBanca: data["nomeBanca"] as! String,
+                        tiposDeProduto: data["tiposDeProduto"] as! String,
+                        descricao: data["descricao"] as! String)
+                    feirantes.append(feirante)
+                }
+                completion(feirantes)
             }
         }
     }
+    
+    func addFeirante(feirante: Feirante) {
+        let _ = db.collection("feirantes").addDocument(data: [
+            "nome": feirante.nome,
+            "email": feirante.email,
+            "telefone": feirante.telefone,
+            "senha": feirante.senha,
+            "nomeBanca": feirante.nomeBanca,
+            "tiposDeProduto": feirante.tiposDeProduto,
+            "descricao": feirante.descricao
+        ]) { err in
+            if let err = err {
+                print("Erro ao adicionar o feirante: \(err.localizedDescription)")
+            } else {
+                print("Feirante adicionado com sucesso.")
+            }
+        }
+    }
+    
+    func deleteFeirante(id: String) {
+        db.collection("feirantes").document(id).delete() { err in
+            if let err = err {
+                print("Erro ao remover o feirante: \(err.localizedDescription)")
+            } else {
+                print("Feirante removido com sucesso.")
+            }
+        }
+    }
+    
+    func getFeiranteID(email: String, completion: @escaping (String?) -> Void) {
+        db.collection("feirantes").whereField("email", isEqualTo: email).getDocuments { (snapshot, error) in
+            if let err = error {
+                print("Erro ao obter o feirante: \(err.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            if let document = snapshot?.documents.first {
+                let feiranteID = document.documentID
+                completion(feiranteID)
+            } else {
+                print("Nenhum feirante encontrado com o email fornecido.")
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    //--------------------------------------------------------------------------------------------------------------
+    //Funções de Clientes
+    
     
     func fetchClientes(completion: @escaping ([Cliente]) -> ()) {
         db.collection("clientes").getDocuments() { (querySnapshot, err) in
@@ -52,14 +114,49 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func deleteCliente(id: String) {
-            db.collection("clientes").document(id).delete() { err in
-                if let err = err {
-                    print("Erro ao remover o cliente: \(err.localizedDescription)")
-                } else {
-                    print("Cliente removido com sucesso.")
-                }
+    func addCliente(cliente: Cliente) {
+        let _ = db.collection("clientes").addDocument(data: [
+            "nome": cliente.nome,
+            "email": cliente.email,
+            "telefone": cliente.telefone,
+            "senha": cliente.senha,
+            "predio": cliente.predio,
+            "apartamento": cliente.apartamento
+        ]) { err in
+            if let err = err {
+                print("Erro ao adicionar o cliente: \(err.localizedDescription)")
+            } else {
+                print("Cliente adicionado com sucesso.")
             }
         }
+    }
+    
+    func deleteCliente(id: String) {
+        db.collection("clientes").document(id).delete() { err in
+            if let err = err {
+                print("Erro ao remover o cliente: \(err.localizedDescription)")
+            } else {
+                print("Cliente removido com sucesso.")
+            }
+        }
+    }
+    
+    func getClientID(email: String, completion: @escaping (String?) -> Void) {
+        db.collection("clientes").whereField("email", isEqualTo: email).getDocuments { (snapshot, error) in
+            if let err = error {
+                print("Erro ao obter o cliente: \(err.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            if let document = snapshot?.documents.first {
+                let clienteID = document.documentID
+                completion(clienteID)
+            } else {
+                print("Nenhum cliente encontrado com o email fornecido.")
+                completion(nil)
+            }
+        }
+    }
     
 }
