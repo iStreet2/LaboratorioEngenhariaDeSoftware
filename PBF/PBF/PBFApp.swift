@@ -30,7 +30,7 @@ struct PBFApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ChooseAccountView(context: dataController.container.viewContext)
+            CreateFeiranteAccountView(context: dataController.container.viewContext)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(vm)
         }

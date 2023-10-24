@@ -40,7 +40,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func addFeirante(feirante: Feirante) {
+    func addFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {
         let _ = db.collection("feirantes").addDocument(data: [
             "nome": feirante.nome,
             "email": feirante.email,
@@ -52,11 +52,14 @@ class ViewModel: ObservableObject {
         ]) { err in
             if let err = err {
                 print("Erro ao adicionar o feirante: \(err.localizedDescription)")
+                completion(false)
             } else {
                 print("Feirante adicionado com sucesso.")
+                completion(true)
             }
         }
     }
+
     
     func deleteFeirante(id: String) {
         db.collection("feirantes").document(id).delete() { err in

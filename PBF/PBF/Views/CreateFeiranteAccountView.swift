@@ -13,9 +13,12 @@ struct CreateFeiranteAccountView: View {
     @State var emailInput: String = ""
     @State var cpfInput: String = ""
     @State var passInput: String = ""
-    
-    @State var navigate = false
-    
+        
+    //Variaveis para a animacao do botao
+    @State private var isLoading = false
+    @State private var isSuccess = false
+    @State private var navigate = false
+
     
     
     @EnvironmentObject var vm: ViewModel
@@ -66,17 +69,65 @@ struct CreateFeiranteAccountView: View {
                     .padding()
                     Spacer()
                     VStack{
-                        NavigationLink("Criar Conta"){
-                            ContentView()
-                                .navigationBarBackButtonHidden(true)
-                                .onAppear{
-                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "") //Crio um feirante com base nos dados inseridos pelo usuario
+//                        NavigationLink("Criar Conta"){
+//                            ContentView()
+//                                .navigationBarBackButtonHidden(true)
+//                                .onAppear{
+//                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "") //Crio um feirante com base nos dados inseridos pelo usuario
+//                                    
+//                                    vm.addFeirante(feirante: feirante) //Mando esse feirante para o banco de dados :)
+//                                }
+//                            
+//                        }
+//                        .buttonStyle(PBFButtonSyle())
+                        VStack {
+                            if !isLoading {
+                                Button("Criar Conta") {
+                                    withAnimation {
+                                        isLoading = true
+                                    }
                                     
-                                    vm.addFeirante(feirante: feirante) //Mando esse feirante para o banco de dados :)
+                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "")
+                                    
+                                    vm.addFeirante(feirante: feirante) { success in
+                                        if success {
+                                            withAnimation {
+                                                isSuccess = true
+                                            }
+                                        } else {
+                                            withAnimation {
+                                                isLoading = false
+                                            }
+                                        }
+                                    }
                                 }
+                                .buttonStyle(PBFButtonSyle())
+                            }
                             
+                            if isLoading {
+                                if isSuccess {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .foregroundColor(.green)
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                withAnimation {
+                                                    navigate = true
+                                                }
+                                            }
+                                        }
+                                } else {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
+                                        .scaleEffect(1.5)
+                                }
+                            }
                         }
-                        .buttonStyle(PBFButtonSyle())
+
+                        NavigationLink("", destination: ContentView().navigationBarBackButtonHidden(true), isActive: $navigate)
+                            .hidden()
+
                     }
                     Spacer()
                 }
