@@ -6,12 +6,31 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CreateClientAccountView: View {
     @State var nameInput: String = ""
     @State var emailInput: String = ""
     @State var passInput: String = ""
+    @State var apInput: String = ""
+    @State var buildingInput: String = ""
     
+    // Variáveis para a animação do botão
+    @State private var isLoading = false
+    @State private var isSuccess = false
+    @State private var navigate = false
+    
+    @EnvironmentObject var vm: ViewModel
+    
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
+
     var body: some View {
         NavigationView{
             ScrollView{
@@ -41,16 +60,85 @@ struct CreateClientAccountView: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
+                        Text("Apartamento")
+                            .foregroundStyle(.gray)
+                        TextField("", text: $apInput)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
+                        Text("Prédio")
+                            .foregroundStyle(.gray)
+                        TextField("", text: $buildingInput)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
                     }
                     .padding()
+                    Spacer()
                     VStack{
-                        NavigationLink("Criar Conta"){
-                            ContentView()
-                                .navigationBarBackButtonHidden(true)
+                        VStack {
+                            if !isLoading {
+                                Button("Criar Conta") {
+                                    withAnimation {
+                                        isLoading = true
+                                    }
+                                    
+                                    let cliente = Cliente(nome: nameInput, email: emailInput, telefone: "", senha: passInput, predio: apInput, apartamento: buildingInput)
+                                    
+                                    vm.addCliente(cliente: cliente) { success in
+                                        if success {
+                                            withAnimation {
+                                                isSuccess = true
+                                            }
+                                        } else {
+                                            withAnimation {
+                                                isLoading = false
+                                            }
+                                        }
+                                    }
+                                    
+                                    // Simulando sucesso após 2 segundos
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                        withAnimation {
+                                            isSuccess = true
+                                        }
+                                    }
+                                }
+                                .buttonStyle(PBFButtonSyle())
+                            }
+                            
+                            if isLoading {
+                                if isSuccess {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .foregroundColor(.green)
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                withAnimation {
+                                                    navigate = true
+                                                }
+                                            }
+                                        }
+                                } else {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
+                                        .scaleEffect(1.5)
+                                }
+                            }
                         }
-                        .buttonStyle(PBFButtonSyle())
+
+                        NavigationLink("", destination: ContentView().navigationBarBackButtonHidden(true), isActive: $navigate)
+                            .hidden()
+
                     }
+                    Spacer()
                 }
+                
                 .navigationTitle("Cliente")
             }
         }
@@ -58,5 +146,5 @@ struct CreateClientAccountView: View {
 }
 
 #Preview {
-    CreateClientAccountView()
+    CreateClientAccountView(context: DataController().container.viewContext)
 }

@@ -117,7 +117,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func addCliente(cliente: Cliente) {
+    func addCliente(cliente: Cliente, completion: @escaping (Bool) -> Void) {
         let _ = db.collection("clientes").addDocument(data: [
             "nome": cliente.nome,
             "email": cliente.email,
@@ -128,11 +128,14 @@ class ViewModel: ObservableObject {
         ]) { err in
             if let err = err {
                 print("Erro ao adicionar o cliente: \(err.localizedDescription)")
+                completion(false)
             } else {
                 print("Cliente adicionado com sucesso.")
+                completion(true)
             }
         }
     }
+
     
     func deleteCliente(id: String) {
         db.collection("clientes").document(id).delete() { err in

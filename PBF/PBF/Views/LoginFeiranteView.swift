@@ -41,7 +41,7 @@ struct LoginFeiranteView: View {
                     
                     //Botão para criar uma conta
                     NavigationLink() {
-                        CreateClientAccountView()
+//                        CreateClientAccountView()
                     } label: {
                         Text("Criar conta")
                             .foregroundColor(.gray)

@@ -17,7 +17,9 @@ struct Teste: View {
     var body: some View {
         Button(action: {
             let cliente = Cliente(nome: "Sabrina", email: "sabrinaLinda.com", telefone: "soumuitolinda", senha: "soubobona", predio: "correia sampaio 864", apartamento: "32")
-            vm.addCliente(cliente: cliente)
+            vm.addCliente(cliente: cliente){_ in 
+                
+            }
             
         }, label: {
             Text("Botão")
