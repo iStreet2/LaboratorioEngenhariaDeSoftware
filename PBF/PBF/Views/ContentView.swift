@@ -1,20 +1,66 @@
 //
-//  ContentView.swift
+//  ChooseAccountView.swift
 //  PBF
 //
-//  Created by Gabriel Vicentin Negro on 13/09/23.
+//  Created by Laura C. Balbachan dos Santos on 10/10/23.
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
+    @EnvironmentObject var vm: ViewModel
+    
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
+    
     var body: some View {
-        Text("Hello World")
+        NavigationStack {
+            VStack {
+                Text("Por favor, selecione o tipo de conta que deseja realizar o login")
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Color.gray)
+                
+                // MARK: Conectar com o Firebase
+                // Botão para as views do feirante
+                NavigationLink("Feirante"){
+                    if myDataController.checkEmailFeirante(){ //Se eu ja tiver um email no CoreData, eu vou para a HomeView direto, se nao eu vou pro login
+                        HomeViewFeirante()
+                    }else{
+                        LoginFeiranteView(context: context)
+                    }
+                }
+                .buttonStyle(PBFButtonSyle())
+                
+                // Botão para as views do cliente
+                NavigationLink("Cliente"){
+                    if myDataController.checkEmailCliente(){ //Mesma logica anterior
+                        HomeViewCliente()
+                    }else{
+                        LoginClientView(context: context)
+                    }
+                }
+                .buttonStyle(PBFButtonSyle())
+            }
+            .padding()
+        }
+        
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+
+#Preview {
+    ContentView(context: DataController().container.viewContext)
 }
+

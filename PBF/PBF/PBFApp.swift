@@ -30,7 +30,7 @@ struct PBFApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CreateClientAccountView(context: dataController.container.viewContext)
+            ContentView(context: dataController.container.viewContext)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(vm)
         }

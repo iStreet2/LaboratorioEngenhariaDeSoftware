@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import CoreData
 
 struct LoginFeiranteView: View {
     @State var loginInput: String = ""
     @State var passwordInput: String = ""
+    
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -64,5 +78,5 @@ struct LoginFeiranteView: View {
 }
 
 #Preview {
-    LoginFeiranteView()
+    LoginFeiranteView(context: DataController().container.viewContext)
 }

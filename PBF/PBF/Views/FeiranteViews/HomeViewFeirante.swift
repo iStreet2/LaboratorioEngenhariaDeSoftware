@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomeViewFeirante: View {
     var body: some View {
         TabView {
             FeirasView()
@@ -29,5 +29,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeViewFeirante()
 }

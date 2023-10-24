@@ -69,17 +69,6 @@ struct CreateFeiranteAccountView: View {
                     .padding()
                     Spacer()
                     VStack{
-//                        NavigationLink("Criar Conta"){
-//                            ContentView()
-//                                .navigationBarBackButtonHidden(true)
-//                                .onAppear{
-//                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "") //Crio um feirante com base nos dados inseridos pelo usuario
-//                                    
-//                                    vm.addFeirante(feirante: feirante) //Mando esse feirante para o banco de dados :)
-//                                }
-//                            
-//                        }
-//                        .buttonStyle(PBFButtonSyle())
                         VStack {
                             if !isLoading {
                                 Button("Criar Conta") {
@@ -125,7 +114,7 @@ struct CreateFeiranteAccountView: View {
                             }
                         }
 
-                        NavigationLink("", destination: ContentView().navigationBarBackButtonHidden(true), isActive: $navigate)
+                        NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                             .hidden()
 
                     }
