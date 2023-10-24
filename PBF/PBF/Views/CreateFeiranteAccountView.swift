@@ -16,6 +16,8 @@ struct CreateFeiranteAccountView: View {
     
     @State var navigate = false
     
+    
+    
     @EnvironmentObject var vm: ViewModel
     
     //Coisa do CoreData
@@ -52,14 +54,6 @@ struct CreateFeiranteAccountView: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
-                        Text("CPF/CNPJ")
-                            .foregroundStyle(.gray)
-                        TextField("", text: $emailInput)
-                            .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.black, lineWidth: 0.5)
-                            )
                         Text("Senha")
                             .foregroundStyle(.gray)
                         TextField("", text: $passInput)
@@ -75,9 +69,12 @@ struct CreateFeiranteAccountView: View {
                         NavigationLink("Criar Conta"){
                             ContentView()
                                 .navigationBarBackButtonHidden(true)
-                                .onAppear{ //Salvar dados no banco de dados
-                                    let feirante = Feirante(_) //PAREI AQUI, ONDE TENHO QUE CRIAR UMA VARIAVEL COM A INSTANCIA DO MEU FEIRANTE PARA CHAMAR A FUNCAO DA VIEWMODEL ADDFEIRANTE E MANDAR ELE PRO BANCO DE DADOS :)
+                                .onAppear{
+                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "") //Crio um feirante com base nos dados inseridos pelo usuario
+                                    
+                                    vm.addFeirante(feirante: feirante) //Mando esse feirante para o banco de dados :)
                                 }
+                            
                         }
                         .buttonStyle(PBFButtonSyle())
                     }
