@@ -114,7 +114,7 @@ struct CreateFeiranteAccountView: View {
                             }
                         }
 
-                        NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
+                        NavigationLink("", destination: HomeViewFeirante(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                             .hidden()
 
                     }

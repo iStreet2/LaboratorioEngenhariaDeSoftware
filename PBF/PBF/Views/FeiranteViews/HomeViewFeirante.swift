@@ -6,21 +6,36 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HomeViewFeirante: View {
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
+    
     var body: some View {
         TabView {
-            FeirasView()
+            PedidosView()
                 .tabItem {
-                    Label("Feiras", systemImage: "storefront")
+                    Label("Pedidos", systemImage: "list.clipboard")
                 }
             
-            CartView()
+            ItensView()
                 .tabItem {
                     Label("Carrinho", systemImage: "cart")
                 }
             
-            ProfileView()
+            PerfilFeiranteView()
                 .tabItem {
                     Label("Perfil", systemImage: "person")
                 }
@@ -29,5 +44,5 @@ struct HomeViewFeirante: View {
 }
 
 #Preview {
-    HomeViewFeirante()
+    HomeViewFeirante(context: DataController().container.viewContext)
 }

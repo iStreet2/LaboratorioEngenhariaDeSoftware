@@ -132,7 +132,7 @@ struct CreateClientAccountView: View {
                             }
                         }
 
-                        NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
+                        NavigationLink("", destination: HomeViewCliente(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                             .hidden()
 
                     }

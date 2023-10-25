@@ -37,7 +37,6 @@
 		3B59C0CC2AD6C3E8006C86CF /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CB2AD6C3E8006C86CF /* FirebaseAnalyticsSwift */; };
 		3B59C0CE2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CD2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		3B59C0D02AD6C3E8006C86CF /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CF2AD6C3E8006C86CF /* FirebaseAppCheck */; };
-		3B59C0D22AD6C61B006C86CF /* Teste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59C0D12AD6C61B006C86CF /* Teste.swift */; };
 		3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D22AB1EF750047FCE4 /* PBFApp.swift */; };
 		3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D62AB1EF760047FCE4 /* Assets.xcassets */; };
 		3B7570DA2AB1EF760047FCE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */; };
@@ -49,6 +48,10 @@
 		3BBAB79A2AD6CD5500C57128 /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3BBAB7992AD6CD5500C57128 /* Aptabase */; };
 		3BD9C0122AE748C400CE1BCB /* PreviewPersistantController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9C0112AE748C400CE1BCB /* PreviewPersistantController.swift */; };
 		3BE3165A2AE8117B00294EF9 /* HomeViewFeirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */; };
+		3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3165D2AE9272000294EF9 /* CheckBoxStyle.swift */; };
+		3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3165F2AE9298A00294EF9 /* PedidosView.swift */; };
+		3BE316622AE929B900294EF9 /* ItensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316612AE929B900294EF9 /* ItensView.swift */; };
+		3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,13 +76,16 @@
 		3B59C0B22AD6BF51006C86CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B59C0C22AD6C07A006C86CF /* Cliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cliente.swift; sourceTree = "<group>"; };
 		3B59C0C52AD6C335006C86CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		3B59C0D12AD6C61B006C86CF /* Teste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teste.swift; sourceTree = "<group>"; };
 		3B7570CF2AB1EF750047FCE4 /* PBF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7570D22AB1EF750047FCE4 /* PBFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFApp.swift; sourceTree = "<group>"; };
 		3B7570D62AB1EF760047FCE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3BD9C0112AE748C400CE1BCB /* PreviewPersistantController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPersistantController.swift; sourceTree = "<group>"; };
 		3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFeirante.swift; sourceTree = "<group>"; };
+		3BE3165D2AE9272000294EF9 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
+		3BE3165F2AE9298A00294EF9 /* PedidosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosView.swift; sourceTree = "<group>"; };
+		3BE316612AE929B900294EF9 /* ItensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItensView.swift; sourceTree = "<group>"; };
+		3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilFeiranteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				3B17CE522AD6DD3600B8D895 /* PBFButtonStyle.swift */,
+				3BE3165D2AE9272000294EF9 /* CheckBoxStyle.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -136,12 +143,9 @@
 		3B17CE542AD6DD6200B8D895 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B17CE572AD6DD9000B8D895 /* ContentView.swift */,
 				3BE3165B2AE811EE00294EF9 /* FeiranteViews */,
 				3BE3165C2AE811F400294EF9 /* ClienteCiews */,
-				3B17CE572AD6DD9000B8D895 /* ContentView.swift */,
-				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
-				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
-				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,7 +205,6 @@
 				3B4C846A2AE73DE600997209 /* Controller */,
 				3B59C0C42AD6C328006C86CF /* ViewModel */,
 				3B59C0C12AD6C063006C86CF /* Model */,
-				3B59C0D12AD6C61B006C86CF /* Teste.swift */,
 				3B17CE542AD6DD6200B8D895 /* Views */,
 				3B17CE512AD6DD1F00B8D895 /* Style */,
 				3B17CE4C2AD6DCC600B8D895 /* Components */,
@@ -233,6 +236,9 @@
 				3B4032DB2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift */,
 				3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */,
 				3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */,
+				3BE3165F2AE9298A00294EF9 /* PedidosView.swift */,
+				3BE316612AE929B900294EF9 /* ItensView.swift */,
+				3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */,
 			);
 			path = FeiranteViews;
 			sourceTree = "<group>";
@@ -243,6 +249,9 @@
 				3B17CE592AD6DDA200B8D895 /* CreateClientAccountView.swift */,
 				3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */,
 				3B4C84682AE6D84200997209 /* HomeViewCliente.swift */,
+				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
+				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
+				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
 			);
 			path = ClienteCiews;
 			sourceTree = "<group>";
@@ -342,6 +351,7 @@
 			files = (
 				3B17CE532AD6DD3600B8D895 /* PBFButtonStyle.swift in Sources */,
 				3BD9C0122AE748C400CE1BCB /* PreviewPersistantController.swift in Sources */,
+				3BE316622AE929B900294EF9 /* ItensView.swift in Sources */,
 				3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */,
 				3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */,
 				3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */,
@@ -351,12 +361,14 @@
 				3B4C846C2AE73DF900997209 /* DataController.swift in Sources */,
 				3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */,
 				3BE3165A2AE8117B00294EF9 /* HomeViewFeirante.swift in Sources */,
+				3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */,
 				3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */,
 				3B59C0C62AD6C335006C86CF /* ViewModel.swift in Sources */,
 				3B4C84692AE6D84200997209 /* HomeViewCliente.swift in Sources */,
-				3B59C0D22AD6C61B006C86CF /* Teste.swift in Sources */,
 				3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */,
+				3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */,
 				3B17CE5A2AD6DDA200B8D895 /* CreateClientAccountView.swift in Sources */,
+				3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */,
 				3B17CE582AD6DD9000B8D895 /* ContentView.swift in Sources */,
 				3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */,
 				3B4032DC2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift in Sources */,
@@ -507,9 +519,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gabrielvicentinnegro.PBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -537,9 +552,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gabrielvicentinnegro.PBF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

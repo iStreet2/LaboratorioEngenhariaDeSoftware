@@ -59,7 +59,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
     
     func deleteFeirante(id: String) {
         db.collection("feirantes").document(id).delete() { err in
@@ -87,6 +87,41 @@ class ViewModel: ObservableObject {
                 completion(nil)
             }
         }
+    }
+    
+    func getSenhaFeirante(forID id: String, completion: @escaping (String?, Error?) -> Void) {
+        db.collection("feirantes").document(id).getDocument { (document, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let document = document, document.exists, let data = document.data(), let senha = data["senha"] as? String else {
+                completion(nil, nil)
+                return
+            }
+            
+            completion(senha, nil)
+        }
+    }
+    
+    func getSenhaFeiranteWithEmail(email: String, completion: @escaping (String?, Error?) -> Void) {
+        db.collection("feirantes")
+            .whereField("email", isEqualTo: email)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents, let firstDoc = documents.first else {
+                    completion(nil, nil) // Email não encontrado
+                    return
+                }
+                
+                let senha = firstDoc.data()["senha"] as? String
+                completion(senha, nil)
+            }
     }
     
     
@@ -135,7 +170,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
     
     func deleteCliente(id: String) {
         db.collection("clientes").document(id).delete() { err in
@@ -164,5 +199,51 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    func getSenhaClient(forID id: String, completion: @escaping (String?, Error?) -> Void) {
+        db.collection("clientes").document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                let senha = data?["senha"] as? String
+                completion(senha, nil)
+            } else if let error = error {
+                completion(nil, error)
+            } else {
+                completion(nil, NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Documento não encontrado."]))
+            }
+        }
+    }
+    
+    func getSenhaClienteWithEmail(email: String, completion: @escaping (String?, Error?) -> Void) {
+        db.collection("clientes")
+            .whereField("email", isEqualTo: email)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents, let firstDoc = documents.first else {
+                    completion(nil, nil) // Email não encontrado
+                    return
+                }
+                
+                let senha = firstDoc.data()["senha"] as? String
+                completion(senha, nil)
+            }
+    }
+    
+    //Funções Produtos ----------------------------------------------------------
+    
+    func criarProduto(product: Produto, completion: @escaping (Error?) -> Void) {
+        var newProduct = product
+        if newProduct.id == nil {
+            newProduct.id = UUID().uuidString
+        }
+        
+        db.collection("produtos").document(newProduct.id!).setData(newProduct.toAnyObject() as! [String : Any]) { error in
+            completion(error)
+        }
+    }
+    
     
 }

@@ -12,6 +12,15 @@ struct LoginFeiranteView: View {
     @State var loginInput: String = ""
     @State var passwordInput: String = ""
     
+    //Variaveis para a animacao do botao
+    @State private var isLoading = false
+    @State private var isSuccess = false
+    @State private var navigate = false
+    @State private var wrongPass = false
+    
+    @State private var keepMeLoggedIn = false
+    
+    @EnvironmentObject var vm: ViewModel
     
     //Coisa do CoreData
     @Environment(\.managedObjectContext) var context //Contexto, DataController
@@ -42,9 +51,14 @@ struct LoginFeiranteView: View {
                         )
                     
                     // Senha
-                    
-                    Text("Senha")
-                        .foregroundStyle(.gray)
+                    HStack{
+                        Text("Senha")
+                            .foregroundStyle(.gray)
+                        if wrongPass{
+                            Text("Senha incorreta!")
+                                .foregroundColor(.red)
+                        }
+                    }
                     TextField("", text: $passwordInput)
                         .padding()
                         .overlay(
@@ -55,21 +69,102 @@ struct LoginFeiranteView: View {
                     
                     //Botão para criar uma conta
                     NavigationLink() {
-//                        CreateClientAccountView()
+                        CreateFeiranteAccountView(context: context)
                     } label: {
                         Text("Criar conta")
                             .foregroundColor(.gray)
                             .underline()
                             .font(.system(size:13))
                     }
+                    
+                    Toggle(isOn: $keepMeLoggedIn) {
+                        Text("Mantenha-me conectado")
+                    }
+                    .toggleStyle(CheckboxStyle())
+                    .padding(.top)
+                    
                 }
+                if !isLoading {
+                    Button("Login") {
+                        withAnimation {
+                            isLoading = true
+                        }
+                        
+                        vm.getSenhaFeiranteWithEmail(email: loginInput) { senha, error in
+                            if let error = error {
+                                print("Ocorreu um erro ao obter a senha: \(error.localizedDescription)")
+                                withAnimation {
+                                    isLoading = false
+                                }
+                                return
+                            }
+                            
+                            if senha == passwordInput {
+                                print("Login bem-sucedido!")
+                                withAnimation {
+                                    isSuccess = true
+                                    wrongPass = false
+                                }
+                                vm.getFeiranteID(email: loginInput) { feiranteID in
+                                    if let id = feiranteID {
+                                        // Salvar os detalhes no CoreData
+                                        if keepMeLoggedIn {
+                                            myDataController.saveLoginFeirante(id: id, email: loginInput)
+                                        }
+                                    } else {
+                                        print("Não foi possível obter o ID do feirante.")
+                                    }
+                                }
+                            }
+                            
+                            
+                            else {
+                                print("Senha incorreta ou Feirante não encontrado.")
+                                withAnimation {
+                                    isLoading = false
+                                    wrongPass = true
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                    .buttonStyle(PBFButtonSyle())
+                }
+                
+                if isLoading {
+                    if isSuccess {
+                        Image(systemName: "checkmark.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.green)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    withAnimation {
+                                        navigate = true
+                                    }
+                                }
+                            }
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
+                            .scaleEffect(1.5)
+                    }
+                }
+                
+                NavigationLink("", destination: HomeViewFeirante(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
+                    .hidden()
+                
+                
                 
                 Spacer()
                 // Botão para continuar
-                NavigationLink("Login") {
-                    FeirasView()
-                }
-                .buttonStyle(PBFButtonSyle())
+                
+                
+                //                NavigationLink("Login") {
+                //                    FeirasView()
+                //                }
+                //                .buttonStyle(PBFButtonSyle())
                 
             }
             .padding()

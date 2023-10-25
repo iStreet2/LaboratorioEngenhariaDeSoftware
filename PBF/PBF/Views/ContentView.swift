@@ -36,7 +36,8 @@ struct ContentView: View {
                 // Botão para as views do feirante
                 NavigationLink("Feirante"){
                     if myDataController.checkEmailFeirante(){ //Se eu ja tiver um email no CoreData, eu vou para a HomeView direto, se nao eu vou pro login
-                        HomeViewFeirante()
+                        HomeViewFeirante(context: context)
+                            .navigationBarBackButtonHidden(true)
                     }else{
                         LoginFeiranteView(context: context)
                     }
@@ -46,7 +47,8 @@ struct ContentView: View {
                 // Botão para as views do cliente
                 NavigationLink("Cliente"){
                     if myDataController.checkEmailCliente(){ //Mesma logica anterior
-                        HomeViewCliente()
+                        HomeViewCliente(context: context)
+                            .navigationBarBackButtonHidden(true)
                     }else{
                         LoginClientView(context: context)
                     }
