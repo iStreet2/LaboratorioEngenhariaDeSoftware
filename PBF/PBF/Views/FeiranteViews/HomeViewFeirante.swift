@@ -30,7 +30,7 @@ struct HomeViewFeirante: View {
                     Label("Pedidos", systemImage: "list.clipboard")
                 }
             
-            ItensView()
+            ItensView(context: context)
                 .tabItem {
                     Label("Carrinho", systemImage: "cart")
                 }

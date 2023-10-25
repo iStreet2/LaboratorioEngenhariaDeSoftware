@@ -7,16 +7,19 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class ViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    
+    @Published var feiranteAtualEmail: String = "zerado"
+    @Published var clienteAtualEmail: String = "zerado"
+    @Published var produtos: [Produto] = []
     
     //Funções de Feirantes
     
-    func fetchFeirantes(completion: @escaping ([Feirante]) -> ()) {
+    func fetchFeirantes(completion: @escaping ([Feirante]) -> ()) { //Funcao que retorna um vetor de todos os feirantes do meu banco de dados
         db.collection("feirantes").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Erro ao obter feirantes: \(err)")
@@ -39,6 +42,57 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchFeirante(email: String, completion: @escaping (Feirante?) -> Void) { //Funcao que retorna um feirante especifico baseado no email
+        let db = Firestore.firestore()
+        
+        // Suponho que sua coleção seja chamada "feirantes"
+        let feiranteRef = db.collection("feirantes").document(email)
+        
+        feiranteRef.getDocument { (document, error) in
+            if let error = error {
+                print("Erro ao buscar feirante: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            if let document = document, document.exists {
+                do {
+                    let feirante = try document.data(as: Feirante.self)
+                    completion(feirante)
+                } catch {
+                    print("Erro ao decodificar feirante: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            } else {
+                print("Feirante não encontrado.")
+                completion(nil)
+            }
+        }
+    }
+    func fetchProdutosDoFeirante(emailFeirante: String) { //Funcao que aplica nos self.produtos todos os produtos do feirante atual
+        db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Erro ao buscar produtos: \(error.localizedDescription)")
+            } else {
+                var produtosTemp: [Produto] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let produto = Produto(
+                        id: document.documentID,
+                        nome: data["nome"] as! String,
+                        preco: data["preço"] as! String,
+                        quantidade: data["quantidade"] as! Int,
+                        descricao: data["descricao"] as! String,
+                        feiranteEmail: data["feiranteEmail"] as! String
+                    )
+                    produtosTemp.append(produto)
+                }
+                self.produtos = produtosTemp
+            }
+        }
+    }
+    
     
     func addFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {
         let _ = db.collection("feirantes").addDocument(data: [
@@ -245,5 +299,33 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func editarProduto(nomeOriginal: String, novoProduto: Produto, completion: @escaping (Bool) -> ()) {
+        
+        // Acessando a coleção de produtos
+        let produtosRef = db.collection("produtos")
+        
+        // Consulta para encontrar o produto pelo seu nome
+        produtosRef.whereField("nome", isEqualTo: nomeOriginal).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Erro ao buscar produto: \(err.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            // Se o produto for encontrado, atualizamos com os novos detalhes
+            for document in querySnapshot!.documents {
+                let docID = document.documentID
+                produtosRef.document(docID).setData(novoProduto.toAnyObject() as! [String: Any]) { err in
+                    if let err = err {
+                        print("Erro ao atualizar produto: \(err.localizedDescription)")
+                        completion(false)
+                    } else {
+                        print("Produto atualizado com sucesso.")
+                        completion(true)
+                    }
+                }
+            }
+        }
+    }
     
 }

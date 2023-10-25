@@ -78,6 +78,8 @@ struct CreateFeiranteAccountView: View {
                                     
                                     let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "")
                                     
+                                    vm.feiranteAtualEmail = emailInput
+                                    
                                     vm.addFeirante(feirante: feirante) { success in
                                         if success {
                                             withAnimation {

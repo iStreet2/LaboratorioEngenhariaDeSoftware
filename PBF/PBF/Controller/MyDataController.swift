@@ -62,4 +62,24 @@ class MyDataController: ObservableObject{
         clienteData.id = id
         saveContext()
     }
+    
+    func getEmailFeirante() -> String?{
+        let fetchRequest: NSFetchRequest<FeiranteData> = FeiranteData.fetchRequest()
+        
+        do {
+            let feirantes = try context.fetch(fetchRequest)
+            
+            // Retorna o e-mail do primeiro feirante encontrado.
+            if let feirante = feirantes.first {
+                return feirante.email
+            } else {
+                // Se não encontrar nenhum feirante, retorna nil.
+                return nil
+            }
+            
+        } catch {
+            print("Erro ao buscar e-mail do feirante: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }

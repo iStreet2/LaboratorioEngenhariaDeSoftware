@@ -37,6 +37,8 @@
 		3B59C0CC2AD6C3E8006C86CF /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CB2AD6C3E8006C86CF /* FirebaseAnalyticsSwift */; };
 		3B59C0CE2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CD2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		3B59C0D02AD6C3E8006C86CF /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CF2AD6C3E8006C86CF /* FirebaseAppCheck */; };
+		3B59FA102AE93FCB00AE5C72 /* FullItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59FA0F2AE93FCB00AE5C72 /* FullItemView.swift */; };
+		3B59FA132AE947BD00AE5C72 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59FA122AE947BC00AE5C72 /* EditItemView.swift */; };
 		3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D22AB1EF750047FCE4 /* PBFApp.swift */; };
 		3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D62AB1EF760047FCE4 /* Assets.xcassets */; };
 		3B7570DA2AB1EF760047FCE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */; };
@@ -52,6 +54,8 @@
 		3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3165F2AE9298A00294EF9 /* PedidosView.swift */; };
 		3BE316622AE929B900294EF9 /* ItensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316612AE929B900294EF9 /* ItensView.swift */; };
 		3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */; };
+		3BE316662AE92BA900294EF9 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316652AE92BA900294EF9 /* ItemView.swift */; };
+		3BE316682AE92E7100294EF9 /* AddItemSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316672AE92E7100294EF9 /* AddItemSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +80,8 @@
 		3B59C0B22AD6BF51006C86CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B59C0C22AD6C07A006C86CF /* Cliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cliente.swift; sourceTree = "<group>"; };
 		3B59C0C52AD6C335006C86CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3B59FA0F2AE93FCB00AE5C72 /* FullItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullItemView.swift; sourceTree = "<group>"; };
+		3B59FA122AE947BC00AE5C72 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 		3B7570CF2AB1EF750047FCE4 /* PBF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7570D22AB1EF750047FCE4 /* PBFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFApp.swift; sourceTree = "<group>"; };
 		3B7570D62AB1EF760047FCE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 		3BE3165F2AE9298A00294EF9 /* PedidosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosView.swift; sourceTree = "<group>"; };
 		3BE316612AE929B900294EF9 /* ItensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItensView.swift; sourceTree = "<group>"; };
 		3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilFeiranteView.swift; sourceTree = "<group>"; };
+		3BE316652AE92BA900294EF9 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		3BE316672AE92E7100294EF9 /* AddItemSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				3B17CE4D2AD6DCD400B8D895 /* BarracaCard.swift */,
+				3BE316652AE92BA900294EF9 /* ItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -179,6 +188,17 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3B59FA112AE9479D00AE5C72 /* ItensViews */ = {
+			isa = PBXGroup;
+			children = (
+				3BE316612AE929B900294EF9 /* ItensView.swift */,
+				3BE316672AE92E7100294EF9 /* AddItemSheetView.swift */,
+				3B59FA0F2AE93FCB00AE5C72 /* FullItemView.swift */,
+				3B59FA122AE947BC00AE5C72 /* EditItemView.swift */,
+			);
+			path = ItensViews;
+			sourceTree = "<group>";
+		};
 		3B7570C62AB1EF750047FCE4 = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +257,7 @@
 				3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */,
 				3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */,
 				3BE3165F2AE9298A00294EF9 /* PedidosView.swift */,
-				3BE316612AE929B900294EF9 /* ItensView.swift */,
+				3B59FA112AE9479D00AE5C72 /* ItensViews */,
 				3BE316632AE929C700294EF9 /* PerfilFeiranteView.swift */,
 			);
 			path = FeiranteViews;
@@ -351,9 +371,11 @@
 			files = (
 				3B17CE532AD6DD3600B8D895 /* PBFButtonStyle.swift in Sources */,
 				3BD9C0122AE748C400CE1BCB /* PreviewPersistantController.swift in Sources */,
+				3B59FA102AE93FCB00AE5C72 /* FullItemView.swift in Sources */,
 				3BE316622AE929B900294EF9 /* ItensView.swift in Sources */,
 				3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */,
 				3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */,
+				3BE316682AE92E7100294EF9 /* AddItemSheetView.swift in Sources */,
 				3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */,
 				3B4032DA2AE6A1EC0020EEF3 /* Model.xcdatamodeld in Sources */,
 				3B4C846E2AE73E3D00997209 /* MyDataController.swift in Sources */,
@@ -364,6 +386,7 @@
 				3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */,
 				3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */,
 				3B59C0C62AD6C335006C86CF /* ViewModel.swift in Sources */,
+				3B59FA132AE947BD00AE5C72 /* EditItemView.swift in Sources */,
 				3B4C84692AE6D84200997209 /* HomeViewCliente.swift in Sources */,
 				3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */,
 				3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */,
@@ -371,6 +394,7 @@
 				3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */,
 				3B17CE582AD6DD9000B8D895 /* ContentView.swift in Sources */,
 				3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */,
+				3BE316662AE92BA900294EF9 /* ItemView.swift in Sources */,
 				3B4032DC2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift in Sources */,
 				3B4032D72AE6A0E70020EEF3 /* Reserva.swift in Sources */,
 				3B59C0C32AD6C07A006C86CF /* Cliente.swift in Sources */,

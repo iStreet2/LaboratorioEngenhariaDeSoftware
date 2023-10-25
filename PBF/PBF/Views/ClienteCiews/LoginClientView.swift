@@ -110,6 +110,8 @@ struct LoginClientView: View {
                                     isSuccess = true
                                     wrongPass = false
                                 }
+                                
+                                
                                 vm.getClientID(email: loginInput) { clienteID in
                                     if let id = clienteID {
                                         // Salvar os detalhes no CoreData
