@@ -105,7 +105,9 @@ struct LoginFeiranteView: View {
                                     isSuccess = true
                                     wrongPass = false
                                     vm.feiranteAtualEmail = loginInput
-                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail)
+                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                                        
+                                    }
                                 }
                                 vm.getFeiranteID(email: loginInput) { feiranteID in
                                     if let id = feiranteID {

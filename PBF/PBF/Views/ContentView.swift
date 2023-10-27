@@ -36,16 +36,18 @@ struct ContentView: View {
                 // Botão para as views do feirante
                 NavigationLink("Feirante"){
                     if myDataController.checkEmailFeirante(){ //Se eu ja tiver um email no CoreData, eu vou para a HomeView direto, se nao eu vou pro login
-                        
-                        //ARRUMAR DE PEGAR O EMAIL DO CORE DATA E COLOCAR NO EMAIL ATUAL DA VIEWLMODEL
-                        if let feiranteEmail = myDataController.getEmailFeirante() {
-                            vm.feiranteAtualEmail = feiranteEmail
-                        } else {
-                            print("Nenhum email de feirante encontrado no CoreData.")
-                        }
-                                                
                         HomeViewFeirante(context: context)
                             .navigationBarBackButtonHidden(true)
+                            .onAppear{
+                                if let feiranteEmail = myDataController.getEmailFeirante() { //Coloco  meu feirante atual o que esta logando direto
+                                    vm.feiranteAtualEmail = feiranteEmail
+                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                                        
+                                    }
+                                } else {
+                                    print("Nenhum email de feirante encontrado no CoreData.")
+                                }
+                            }
                     }else{
                         LoginFeiranteView(context: context)
                     }
@@ -57,6 +59,14 @@ struct ContentView: View {
                     if myDataController.checkEmailCliente(){ //Mesma logica anterior
                         HomeViewCliente(context: context)
                             .navigationBarBackButtonHidden(true)
+                            .onAppear{
+                                //Implementar pegar email cliente na viewmodel
+//                                if let clienteEmail = myDataController.getEmailCliente() {
+//                                    vm.clienteAtualEmail = clienteEmail
+//                                } else {
+//                                    print("Nenhum email de feirante encontrado no CoreData.")
+//                                }
+                            }
                     }else{
                         LoginClientView(context: context)
                     }

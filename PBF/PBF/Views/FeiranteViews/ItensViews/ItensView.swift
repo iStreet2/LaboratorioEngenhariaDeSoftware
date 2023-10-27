@@ -35,11 +35,11 @@ struct ItensView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(vm.produtos, id: \.id) { produto in
+                    ForEach(0 ..< vm.produtos.count, id: \.self) { i in
                         NavigationLink {
-                            FullItemView(produto: produto)
+                            FullItemView(i: i)
                         } label: {
-                            ItemView(titulo: produto.nome, preco: produto.preco, quantidade: produto.quantidade)
+                            ItemView(titulo: vm.produtos[i].nome, preco: vm.produtos[i].preco, quantidade: vm.produtos[i].quantidade)
                         }
                     }
                 }

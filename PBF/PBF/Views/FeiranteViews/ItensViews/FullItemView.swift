@@ -10,10 +10,9 @@ import SwiftUI
 struct FullItemView: View {
     @EnvironmentObject var vm: ViewModel
     @State var isShowingSheet = false
-    @State var produto: Produto
+    @State var i: Int
     
     var body: some View {
-        NavigationView{
             ScrollView{
                 VStack(alignment: .leading){
                     VStack(alignment:.leading){
@@ -23,7 +22,7 @@ struct FullItemView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text(produto.nome)
+                        Text(vm.produtos[i].nome)
                             .font(.title2)
                     }
                     .padding()
@@ -37,7 +36,7 @@ struct FullItemView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text(produto.descricao)
+                        Text(vm.produtos[i].descricao)
                             .font(.title2)
                     }
                     .padding()
@@ -51,7 +50,7 @@ struct FullItemView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text("R$ \(produto.preco)")
+                        Text("R$ \(vm.produtos[i].preco)")
                             .font(.title2)
                     }
                     .padding()
@@ -65,7 +64,7 @@ struct FullItemView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text("\(produto.quantidade)")
+                        Text("\(vm.produtos[i].quantidade)")
                             .font(.title2)
                     }
                     .padding()
@@ -85,15 +84,15 @@ struct FullItemView: View {
                 }
             }
             .sheet(isPresented: $isShowingSheet) {
-                EditItemView(produto: produto)
+                EditItemView(produto: vm.produtos[i])
             }
-            
-        }
-        
+            .onAppear{
+                print("OK, ESTOU NO ITEM")
+            }
     }
 }
 
 
 #Preview {
-    FullItemView(produto: Produto(nome: "Mandioca", preco: "0,03", quantidade: 1, descricao: "Mano, uma mandioca muito boa para vc se deliciar comendo umas das maiores maravilhas do brasil", feiranteEmail: ""))
+    FullItemView(i: 0)
 }

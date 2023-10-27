@@ -26,6 +26,8 @@ class MyDataController: ObservableObject{
         }
     }
     
+    //Métodos Feirantes
+    
     func checkEmailFeirante() -> Bool{ //Checar se a pessoa ja tem um email salvo para entrar direto no App
         let amountCoreDataItems = try? context.count(for: FeiranteData.fetchRequest())
         
@@ -37,29 +39,10 @@ class MyDataController: ObservableObject{
         return false
     }
     
-    func checkEmailCliente() -> Bool{ //Checar se a pessoa ja tem um email salvo para entrar direto no App
-        let amountCoreDataItems = try? context.count(for: ClienteData.fetchRequest())
-        
-        guard amountCoreDataItems == 0 else{
-            //tem um email, entao retorna true, para dizer que tem um email registrado
-            return true
-        }
-        //nao tem nenhum email registrado no app, entao retorna falso
-        return false
-    }
-    
-    
     func saveLoginFeirante(id: String, email: String){
         let feiranteData = FeiranteData(context: context)
         feiranteData.email = email
         feiranteData.id = id
-        saveContext()
-    }
-    
-    func saveLoginCliente(id: String, email: String){
-        let clienteData = ClienteData(context: context)
-        clienteData.email = email
-        clienteData.id = id
         saveContext()
     }
     
@@ -82,4 +65,52 @@ class MyDataController: ObservableObject{
             return nil
         }
     }
+    
+    func deleteAllFeiranteData() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = FeiranteData.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+            saveContext()
+            print("Todos os dados de Feirante foram deletados.")
+        } catch {
+            print("Erro ao deletar todos os dados de Feirante: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    //Métodos Cliente
+    
+    func checkEmailCliente() -> Bool{ //Checar se a pessoa ja tem um email salvo para entrar direto no App
+        let amountCoreDataItems = try? context.count(for: ClienteData.fetchRequest())
+        
+        guard amountCoreDataItems == 0 else{
+            //tem um email, entao retorna true, para dizer que tem um email registrado
+            return true
+        }
+        //nao tem nenhum email registrado no app, entao retorna falso
+        return false
+    }
+    
+    func saveLoginCliente(id: String, email: String){
+        let clienteData = ClienteData(context: context)
+        clienteData.email = email
+        clienteData.id = id
+        saveContext()
+    }
+
+    func deleteAllClienteData() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = ClienteData.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+            saveContext()
+            print("Todos os dados de Cliente foram deletados.")
+        } catch {
+            print("Erro ao deletar todos os dados de Cliente: \(error.localizedDescription)")
+        }
+    }
+
 }

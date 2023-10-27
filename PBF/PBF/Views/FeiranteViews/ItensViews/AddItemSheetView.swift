@@ -37,10 +37,12 @@ struct AddItemSheetView: View {
                 vm.criarProduto(product: novoProduto){ _ in 
                 }
                 withAnimation(.easeInOut){
-                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail)
+                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                        dismiss()
+                    }
                 }
                 
-                dismiss()
+               
             }
             )
         }

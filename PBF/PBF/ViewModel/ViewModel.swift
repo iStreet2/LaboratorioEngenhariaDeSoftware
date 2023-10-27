@@ -70,7 +70,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-    func fetchProdutosDoFeirante(emailFeirante: String) { //Funcao que aplica nos self.produtos todos os produtos do feirante atual
+    func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping () -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
         db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Erro ao buscar produtos: \(error.localizedDescription)")
@@ -89,30 +89,42 @@ class ViewModel: ObservableObject {
                     produtosTemp.append(produto)
                 }
                 self.produtos = produtosTemp
+                completion()
             }
         }
     }
     
     
     func addFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {
-        let _ = db.collection("feirantes").addDocument(data: [
-            "nome": feirante.nome,
-            "email": feirante.email,
-            "telefone": feirante.telefone,
-            "senha": feirante.senha,
-            "nomeBanca": feirante.nomeBanca,
-            "tiposDeProduto": feirante.tiposDeProduto,
-            "descricao": feirante.descricao
-        ]) { err in
-            if let err = err {
-                print("Erro ao adicionar o feirante: \(err.localizedDescription)")
+        // Primeiro, verifique se já existe um feirante com esse email
+        fetchFeirante(email: feirante.email) { existingFeirante in
+            // Se o feirante existir, retorne falso para a completion
+            if existingFeirante != nil {
+                print("Erro: Já existe um feirante com esse email.")
                 completion(false)
             } else {
-                print("Feirante adicionado com sucesso.")
-                completion(true)
+                // Caso contrário, prossiga com a adição do feirante
+                let _ = self.db.collection("feirantes").addDocument(data: [
+                    "nome": feirante.nome,
+                    "email": feirante.email,
+                    "telefone": feirante.telefone,
+                    "senha": feirante.senha,
+                    "nomeBanca": feirante.nomeBanca,
+                    "tiposDeProduto": feirante.tiposDeProduto,
+                    "descricao": feirante.descricao
+                ]) { err in
+                    if let err = err {
+                        print("Erro ao adicionar o feirante: \(err.localizedDescription)")
+                        completion(false)
+                    } else {
+                        print("Feirante adicionado com sucesso.")
+                        completion(true)
+                    }
+                }
             }
         }
     }
+
     
     
     func deleteFeirante(id: String) {

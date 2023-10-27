@@ -9,6 +9,10 @@ import SwiftUI
 import CoreData
 
 struct HomeViewCliente: View {
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
     //Coisas do MyDataController
     @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
     
@@ -32,7 +36,7 @@ struct HomeViewCliente: View {
                     Label("Carrinho", systemImage: "cart")
                 }
             
-            ProfileView()
+            ProfileView(context: context)
                 .tabItem {
                     Label("Perfil", systemImage: "person")
                 }
