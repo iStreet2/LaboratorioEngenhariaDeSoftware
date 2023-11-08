@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import SwiftUI
 
 class ViewModel: ObservableObject {
     
@@ -15,7 +16,7 @@ class ViewModel: ObservableObject {
     
     @Published var feiranteAtualEmail: String = "zerado"
     @Published var clienteAtualEmail: String = "zerado"
-    @Published var produtos: [Produto] = []
+    @Published var produtos: [Produto] = [Produto(nome:"Atum", preco: "13,00", quantidade: 3, descricao: "Atum do bom", feiranteEmail: "")]
     
     //Funções de Feirantes
     
@@ -70,29 +71,30 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
     func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping () -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
-        db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Erro ao buscar produtos: \(error.localizedDescription)")
-            } else {
-                var produtosTemp: [Produto] = []
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    let produto = Produto(
-                        id: document.documentID,
-                        nome: data["nome"] as! String,
-                        preco: data["preço"] as! String,
-                        quantidade: data["quantidade"] as! Int,
-                        descricao: data["descricao"] as! String,
-                        feiranteEmail: data["feiranteEmail"] as! String
-                    )
-                    produtosTemp.append(produto)
+            db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Erro ao buscar produtos: \(error.localizedDescription)")
+                } else {
+                    var produtosTemp: [Produto] = []
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        let produto = Produto(
+                            id: document.documentID,
+                            nome: data["nome"] as! String,
+                            preco: data["preço"] as! String,
+                            quantidade: data["quantidade"] as! Int,
+                            descricao: data["descricao"] as! String,
+                            feiranteEmail: data["feiranteEmail"] as! String
+                        )
+                        produtosTemp.append(produto)
+                    }
+                    self.produtos = produtosTemp
+                    completion()
                 }
-                self.produtos = produtosTemp
-                completion()
             }
         }
-    }
     
     
     func addFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {

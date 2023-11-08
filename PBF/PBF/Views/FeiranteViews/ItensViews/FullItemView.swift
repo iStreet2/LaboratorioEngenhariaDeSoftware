@@ -13,8 +13,9 @@ struct FullItemView: View {
     @State var i: Int
     
     var body: some View {
-            ScrollView{
-                VStack(alignment: .leading){
+        ScrollView{
+            VStack(alignment: .leading){
+                Group{
                     VStack(alignment:.leading){
                         HStack{
                             Text("Nome:")
@@ -24,12 +25,7 @@ struct FullItemView: View {
                         }
                         Text(vm.produtos[i].nome)
                             .font(.title2)
-                    }
-                    .padding()
-                    .background(Color("Cinza"))
-                    .cornerRadius(20)
-                    
-                    VStack(alignment:.leading){
+                        
                         HStack{
                             Text("Descrição:")
                                 .font(.title2)
@@ -38,12 +34,6 @@ struct FullItemView: View {
                         }
                         Text(vm.produtos[i].descricao)
                             .font(.title2)
-                    }
-                    .padding()
-                    .background(Color("Cinza"))
-                    .cornerRadius(20)
-                    
-                    VStack(alignment:.leading){
                         HStack{
                             Text("Preço:")
                                 .font(.title2)
@@ -52,12 +42,6 @@ struct FullItemView: View {
                         }
                         Text("R$ \(vm.produtos[i].preco)")
                             .font(.title2)
-                    }
-                    .padding()
-                    .background(Color("Cinza"))
-                    .cornerRadius(20)
-                    
-                    VStack(alignment:.leading){
                         HStack{
                             Text("Quantidade disponível:")
                                 .font(.title2)
@@ -68,11 +52,11 @@ struct FullItemView: View {
                             .font(.title2)
                     }
                     .padding()
-                    .background(Color("Cinza"))
                     .cornerRadius(20)
+                    .padding()
                 }
+                
             }
-            .padding()
             .navigationTitle("Detalhes")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -86,13 +70,12 @@ struct FullItemView: View {
             .sheet(isPresented: $isShowingSheet) {
                 EditItemView(produto: vm.produtos[i])
             }
-            .onAppear{
-                print("OK, ESTOU NO ITEM")
-            }
+        }
     }
 }
 
 
 #Preview {
     FullItemView(i: 0)
+        .environmentObject(ViewModel())
 }

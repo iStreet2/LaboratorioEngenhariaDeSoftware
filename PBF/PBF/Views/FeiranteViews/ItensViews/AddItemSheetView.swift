@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct AddItemSheetView: View {
     
@@ -31,20 +32,17 @@ struct AddItemSheetView: View {
             .navigationTitle("Adicionar Item")
             .navigationBarItems(leading: Button("Cancelar") { dismiss() })
             .navigationBarItems(trailing:
-                                    Button("Salvar") {
+                Button("Salvar") {
                 let novoProduto = Produto(nome: nome, preco: preco, quantidade: Int(quantidade) ?? 0, descricao: descricao, feiranteEmail: vm.feiranteAtualEmail)
                 // Chamando a função createProduct
-                vm.criarProduto(product: novoProduto){ _ in 
+                vm.criarProduto(product: novoProduto){ _ in
                 }
                 withAnimation(.easeInOut){
                     vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
                         dismiss()
                     }
                 }
-                
-               
-            }
-            )
+            })
         }
     }
 }

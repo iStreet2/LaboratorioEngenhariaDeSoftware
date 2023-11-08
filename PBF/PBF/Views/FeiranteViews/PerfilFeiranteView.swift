@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct PerfilFeiranteView: View {
+    @State var navigation = false
+    
     @EnvironmentObject var vm: ViewModel
     
     @Environment(\.managedObjectContext) var context //Contexto, DataController
@@ -29,9 +31,14 @@ struct PerfilFeiranteView: View {
                 VStack {
                     Button {
                         myDataController.deleteAllFeiranteData()
+                        navigation.toggle()
                     } label: {
                         Text("Esquecer Login")
                     }
+                    .padding()
+                    .buttonStyle(PBFButtonSyle())
+                    NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigation)
+                        .hidden()
                 }
             }
             .navigationTitle("Perfil")

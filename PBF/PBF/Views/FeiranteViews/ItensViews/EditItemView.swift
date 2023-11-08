@@ -35,11 +35,15 @@ struct EditItemView: View {
                                     Button("Salvar") {
                 let novoProduto = Produto(nome: nome, preco: preco, quantidade: Int(quantidade) ?? 0, descricao: descricao, feiranteEmail: vm.feiranteAtualEmail)
                 // Chamando a função editarProtudo
-                vm.editarProduto(nomeOriginal: produto.nome, novoProduto: novoProduto) { _ in }
-                
-                vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
-                    print("\nPRODUTOS AQUI AAAAAA -> \(vm.produtos)\n")
-                    dismiss()
+                vm.editarProduto(nomeOriginal: produto.nome, novoProduto: novoProduto) { success in
+                    if success{
+                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                            print("\nPRODUTOS AQUI AAAAAA -> \(vm.produtos)\n")
+                            dismiss()
+                        }
+                    }else{
+                        print("Falha ao atualizar o produto")
+                    }
                 }
             }
             )
