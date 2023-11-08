@@ -192,6 +192,36 @@ class ViewModel: ObservableObject {
             }
     }
     
+    func editarFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {
+        // Verifique se o ID do feirante está presente
+        guard let feiranteId = feirante.id else {
+            print("Erro: ID do feirante é nulo.")
+            completion(false)
+            return
+        }
+
+        // Referência ao documento do feirante
+        let feiranteRef = db.collection("feirantes").document(feiranteId)
+
+        // Atualize os dados do feirante
+        feiranteRef.updateData([
+            "nome": feirante.nome,
+            "telefone": feirante.telefone,
+            "nomeBanca": feirante.nomeBanca,
+            "tiposDeProduto": feirante.tiposDeProduto,
+            "descricao": feirante.descricao
+        ]) { error in
+            if let error = error {
+                print("Erro ao atualizar o feirante: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Feirante atualizado com sucesso.")
+                completion(true)
+            }
+        }
+    }
+
+    
     
     //--------------------------------------------------------------------------------------------------------------
     //Funções de Clientes
@@ -313,33 +343,61 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func editarProduto(nomeOriginal: String, novoProduto: Produto, completion: @escaping (Bool) -> ()) {
+    func editarProduto(produto: Produto, completion: @escaping (Bool) -> ()) {
         
-        // Acessando a coleção de produtos
-        let produtosRef = db.collection("produtos")
         
-        // Consulta para encontrar o produto pelo seu nome
-        produtosRef.whereField("nome", isEqualTo: nomeOriginal).getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Erro ao buscar produto: \(err.localizedDescription)")
+        guard let produtoId = produto.id else {
+            print("Erro: ID do feirante é nulo.")
+            completion(false)
+            return
+        }
+
+        // Referência ao documento do feirante
+        let produtoRef = db.collection("produtos").document(produtoId)
+
+        // Atualize os dados do feirante
+        produtoRef.updateData([
+            "nome": produto.nome,
+            "preco": produto.preco,
+            "quantidade": produto.quantidade,
+            "descricao": produto.descricao,
+            "feiranteEmail": produto.feiranteEmail
+        ]) { error in
+            if let error = error {
+                print("Erro ao atualizar o produto: \(error.localizedDescription)")
                 completion(false)
-                return
-            }
-            
-            // Se o produto for encontrado, atualizamos com os novos detalhes
-            for document in querySnapshot!.documents {
-                let docID = document.documentID
-                produtosRef.document(docID).setData(novoProduto.toAnyObject() as! [String: Any]) { err in
-                    if let err = err {
-                        print("Erro ao atualizar produto: \(err.localizedDescription)")
-                        completion(false)
-                    } else {
-                        print("Produto atualizado com sucesso.")
-                        completion(true)
-                    }
-                }
+            } else {
+                print("Produto atualizado com sucesso.")
+                completion(true)
             }
         }
+        
+        
+//        // Acessando a coleção de produtos
+//        let produtosRef = db.collection("produtos")
+//        
+//        // Consulta para encontrar o produto pelo seu nome
+//        produtosRef.whereField("nome", isEqualTo: nomeOriginal).getDocuments { (querySnapshot, err) in
+//            if let err = err {
+//                print("Erro ao buscar produto: \(err.localizedDescription)")
+//                completion(false)
+//                return
+//            }
+//            
+//            // Se o produto for encontrado, atualizamos com os novos detalhes
+//            for document in querySnapshot!.documents {
+//                let docID = document.documentID
+//                produtosRef.document(docID).setData(novoProduto.toAnyObject() as! [String: Any]) { err in
+//                    if let err = err {
+//                        print("Erro ao atualizar produto: \(err.localizedDescription)")
+//                        completion(false)
+//                    } else {
+//                        print("Produto atualizado com sucesso.")
+//                        completion(true)
+//                    }
+//                }
+//            }
+//        }
     }
     
 }
