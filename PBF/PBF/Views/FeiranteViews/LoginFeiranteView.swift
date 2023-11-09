@@ -104,8 +104,8 @@ struct LoginFeiranteView: View {
                                 withAnimation {
                                     isSuccess = true
                                     wrongPass = false
-                                    vm.feiranteAtualEmail = loginInput
-                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                                    vm.feiranteAtual.email = loginInput
+                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){
                                         
                                     }
                                 }

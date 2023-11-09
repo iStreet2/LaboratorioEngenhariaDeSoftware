@@ -14,8 +14,10 @@ class ViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    @Published var feiranteAtualEmail: String = "zerado"
-    @Published var clienteAtualEmail: String = "zerado"
+//    @Published var feiranteAtualEmail: String = "zerado"
+//    @Published var clienteAtualEmail: String = "zerado"
+    @Published var feiranteAtual: Feirante = Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
+    @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
     @Published var produtos: [Produto] = [Produto(nome:"Atum", preco: "13,00", quantidade: 3, descricao: "Atum do bom", feiranteEmail: "")]
     
     //Funções de Feirantes
@@ -44,33 +46,32 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func fetchFeirante(email: String, completion: @escaping (Feirante?) -> Void) { //Funcao que retorna um feirante especifico baseado no email
-        let db = Firestore.firestore()
-        
-        // Suponho que sua coleção seja chamada "feirantes"
-        let feiranteRef = db.collection("feirantes").document(email)
-        
-        feiranteRef.getDocument { (document, error) in
+    func fetchFeirante(email: String, completion: @escaping (Feirante?) -> Void) {
+        db.collection("feirantes").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Erro ao buscar feirante: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
-            
-            if let document = document, document.exists {
-                do {
-                    let feirante = try document.data(as: Feirante.self)
-                    completion(feirante)
-                } catch {
-                    print("Erro ao decodificar feirante: \(error.localizedDescription)")
-                    completion(nil)
-                }
-            } else {
+
+            guard let document = querySnapshot?.documents.first else {
                 print("Feirante não encontrado.")
+                completion(nil)
+                return
+            }
+
+            do {
+                var feirante = try document.data(as: Feirante.self)
+                feirante.id = document.documentID
+                completion(feirante)
+            } catch {
+                print("Erro ao decodificar feirante: \(error.localizedDescription)")
                 completion(nil)
             }
         }
     }
+
+
     
     func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping () -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
             db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
@@ -371,33 +372,6 @@ class ViewModel: ObservableObject {
                 completion(true)
             }
         }
-        
-        
-//        // Acessando a coleção de produtos
-//        let produtosRef = db.collection("produtos")
-//        
-//        // Consulta para encontrar o produto pelo seu nome
-//        produtosRef.whereField("nome", isEqualTo: nomeOriginal).getDocuments { (querySnapshot, err) in
-//            if let err = err {
-//                print("Erro ao buscar produto: \(err.localizedDescription)")
-//                completion(false)
-//                return
-//            }
-//            
-//            // Se o produto for encontrado, atualizamos com os novos detalhes
-//            for document in querySnapshot!.documents {
-//                let docID = document.documentID
-//                produtosRef.document(docID).setData(novoProduto.toAnyObject() as! [String: Any]) { err in
-//                    if let err = err {
-//                        print("Erro ao atualizar produto: \(err.localizedDescription)")
-//                        completion(false)
-//                    } else {
-//                        print("Produto atualizado com sucesso.")
-//                        completion(true)
-//                    }
-//                }
-//            }
-//        }
     }
     
 }

@@ -17,6 +17,7 @@ struct ItemView: View {
         VStack(alignment: .leading) {
             HStack{
                 Text(titulo)
+                    .frame(alignment: .leading)
                     .bold()
                 Spacer()
             }
@@ -35,5 +36,5 @@ struct ItemView: View {
     }
 }
 #Preview {
-    ItemView(titulo: "Mandioca", preco:"13,90",quantidade:10)
+    ItemView(titulo: "doawjd0wa9", preco:"13,90",quantidade:10)
 }

@@ -12,15 +12,13 @@ struct EditItemView: View {
     @EnvironmentObject var vm: ViewModel
     @Environment(\.dismiss) var dismiss
     @State var quantidade = ""
-    
-    @State var produto: Produto
-    
+    @State var i: Int
     var body: some View {
         NavigationView{
             Form {
-                TextField("Nome", text: $produto.nome)
-                TextField("Descrição", text: $produto.descricao)
-                TextField("Preço", text: $produto.preco)
+                TextField("Nome", text: $vm.produtos[i].nome)
+                TextField("Descrição", text: $vm.produtos[i].descricao)
+                TextField("Preço", text: $vm.produtos[i].preco)
                     .keyboardType(.decimalPad) // Teclado numérico para inserção do preço
                 TextField("Quantidade", text: $quantidade)
                     .keyboardType(.numberPad) // Teclado numérico para inserção da quantidade
@@ -30,13 +28,10 @@ struct EditItemView: View {
             .navigationBarItems(trailing:
                                     Button("Salvar") {
                 // Chamando a função editarProtudo
-                produto.quantidade = Int(quantidade) ?? 0
-                vm.editarProduto(produto: produto) { success in
+                vm.produtos[i].quantidade = Int(quantidade) ?? 0
+                vm.editarProduto(produto: vm.produtos[i]) { success in
                     if success{
-                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
-                            print("\nPRODUTOS AQUI AAAAAA -> \(vm.produtos)\n")
-                            dismiss()
-                        }
+                        dismiss()
                     }else{
                         print("Falha ao atualizar o produto")
                     }
@@ -45,7 +40,7 @@ struct EditItemView: View {
             )
         }
         .onAppear{
-            self.quantidade = String(produto.quantidade)
+            self.quantidade = String(vm.produtos[i].quantidade)
         }
     }
     

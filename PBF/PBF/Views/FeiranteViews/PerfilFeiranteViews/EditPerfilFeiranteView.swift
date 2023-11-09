@@ -9,30 +9,29 @@ import SwiftUI
 
 struct EditPerfilFeiranteView: View {
     
-    @State var feirante: Feirante
     @EnvironmentObject var vm: ViewModel
     @Environment(\.dismiss) var dismiss
         
     var body: some View {
         NavigationView{
             Form {
-                TextField("Nome", text: $feirante.nome)
-                TextField("Email", text: $feirante.email)
-                TextField("Telefone", text: $feirante.telefone)
-                TextField("Nome da Barraca", text: $feirante.nomeBanca)
-                TextField("Desrição da Barraca", text: $feirante.descricao)
-                TextField("Tipos de Produto", text: $feirante.tiposDeProduto)
+                TextField("Nome", text: $vm.feiranteAtual.nome)
+                TextField("Email", text: $vm.feiranteAtual.email)
+                TextField("Telefone", text: $vm.feiranteAtual.telefone)
+                TextField("Nome da Barraca", text: $vm.feiranteAtual.nomeBanca)
+                TextField("Desrição da Barraca", text: $vm.feiranteAtual.descricao)
+                TextField("Tipos de Produto", text: $vm.feiranteAtual.tiposDeProduto)
             }
             .navigationTitle("Editar Item")
             .navigationBarItems(leading: Button("Cancelar") { dismiss() })
             .navigationBarItems(trailing:
                                     Button("Salvar") {
                 // Chamando a função editarProtudo
-                vm.editarFeirante(feirante: feirante) { success in
+                vm.editarFeirante(feirante: vm.feiranteAtual) { success in //Atualizo no banco de dados o que eu ja atualizei na minha ViewModel do feirante atual
                     if success{
                         dismiss()
                     }else{
-                        print("Falha ao atualizar o produto")
+                        print("Falha ao atualizar o feirante")
                     }
                 }
             }

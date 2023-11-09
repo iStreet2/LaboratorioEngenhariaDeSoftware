@@ -68,7 +68,7 @@ struct FullItemView: View {
                 }
             }
             .sheet(isPresented: $isShowingSheet) {
-                EditItemView(produto: vm.produtos[i])
+                EditItemView(i: i)
             }
         }
     }

@@ -100,6 +100,15 @@
       }
     },
     {
+      "identity" : "packageteste",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/iStreet2/PackageTeste.git",
+      "state" : {
+        "revision" : "db879af377e67bbda80a23ebecce9c9b13a731a5",
+        "version" : "1.0.1"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",

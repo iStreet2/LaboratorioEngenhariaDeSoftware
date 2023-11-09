@@ -32,12 +32,12 @@ struct AddItemSheetView: View {
             .navigationBarItems(leading: Button("Cancelar") { dismiss() })
             .navigationBarItems(trailing:
                 Button("Salvar") {
-                let novoProduto = Produto(nome: nome, preco: preco, quantidade: Int(quantidade) ?? 0, descricao: descricao, feiranteEmail: vm.feiranteAtualEmail)
+                let novoProduto = Produto(nome: nome, preco: preco, quantidade: Int(quantidade) ?? 0, descricao: descricao, feiranteEmail: vm.feiranteAtual.email)
                 // Chamando a função createProduct
                 vm.criarProduto(product: novoProduto){ _ in
                 }
                 withAnimation(.easeInOut){
-                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
+                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){
                         dismiss()
                     }
                 }

@@ -14,6 +14,7 @@ struct CreateClientAccountView: View {
     @State var passInput: String = ""
     @State var apInput: String = ""
     @State var buildingInput: String = ""
+    @State var errorMessage: String = ""
     
     // Variáveis para a animação do botão
     @State private var isLoading = false
@@ -30,7 +31,7 @@ struct CreateClientAccountView: View {
     init(context: NSManagedObjectContext) {
         self.myDataController = MyDataController(context: context)
     }
-
+    
     var body: some View {
         NavigationView{
             ScrollView{
@@ -80,9 +81,22 @@ struct CreateClientAccountView: View {
                     .padding()
                     Spacer()
                     VStack{
+                        if !errorMessage.isEmpty {
+                            Text(errorMessage)
+                                .foregroundColor(.red)
+                        }
                         VStack {
                             if !isLoading {
                                 Button("Criar Conta") {
+                                    if emailInput.isEmpty || passInput.isEmpty {
+                                        // Configura a mensagem de erro
+                                        errorMessage = "Por favor, preencha todos os campos."
+                                        return // Sai da função para evitar que o resto do código seja executado
+                                    }
+                                    
+                                    // Limpa a mensagem de erro se os campos estiverem preenchidos
+                                    errorMessage = ""
+                                    
                                     withAnimation {
                                         isLoading = true
                                     }
@@ -131,10 +145,10 @@ struct CreateClientAccountView: View {
                                 }
                             }
                         }
-
+                        
                         NavigationLink("", destination: HomeViewCliente(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                             .hidden()
-
+                        
                     }
                     Spacer()
                 }

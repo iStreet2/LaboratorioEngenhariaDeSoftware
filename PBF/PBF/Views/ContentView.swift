@@ -40,10 +40,12 @@ struct ContentView: View {
                             .navigationBarBackButtonHidden(true)
                             .onAppear{
                                 if let feiranteEmail = myDataController.getEmailFeirante() { //Coloco  meu feirante atual o que esta logando direto
-                                    vm.feiranteAtualEmail = feiranteEmail
-                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtualEmail){
-                                        
+                                    vm.fetchFeirante(email: feiranteEmail){ feirante in//Procuro no meu DataBase um feirante com o email que esta no coredata
+                                        vm.feiranteAtual = feirante ?? vm.feiranteAtual //Aqui eu coloco meu feirante atual da ViewModel igual o feirante que eu achei no meu database baseado no email do CoreData
+                                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){ //Atualizo meu vetor de produtos local com o email do feirante que eu achei
+                                        }
                                     }
+                                    
                                 } else {
                                     print("Nenhum email de feirante encontrado no CoreData.")
                                 }
@@ -60,7 +62,7 @@ struct ContentView: View {
                         HomeViewCliente(context: context)
                             .navigationBarBackButtonHidden(true)
                             .onAppear{
-                                //Implementar pegar email cliente na viewmodel
+                                //Implementar buscar email do CoreData no database e colocar no vm.clienteAtual
 //                                if let clienteEmail = myDataController.getEmailCliente() {
 //                                    vm.clienteAtualEmail = clienteEmail
 //                                } else {

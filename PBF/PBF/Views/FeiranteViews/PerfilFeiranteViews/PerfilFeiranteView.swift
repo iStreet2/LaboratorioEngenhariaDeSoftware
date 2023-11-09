@@ -10,7 +10,6 @@ import CoreData
 
 struct PerfilFeiranteView: View {
     @State var navigation = false
-    @State var feirante = Feirante(nome: "Fernando", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "Minha barraca é muito boa")
     @State var isShowingSheet = false
     
     @EnvironmentObject var vm: ViewModel
@@ -33,20 +32,19 @@ struct PerfilFeiranteView: View {
                 VStack {
                     VStack(alignment:.leading){
                         Group{
-                            Text(feirante.nome)
+                            Text(vm.feiranteAtual.nome)
                                 .font(.system(size:24))
                                 .bold()
                             Group{
-                                Text("Nome da barra: \(feirante.nomeBanca == "" ? "Sua barraca ainda não possui um nome" : feirante.nomeBanca )")
+                                Text("Nome da barra: \(vm.feiranteAtual.nomeBanca == "" ? "Sua barraca ainda não possui um nome" : vm.feiranteAtual.nomeBanca )")
                                 
-                                Text("Descrição: \(feirante.descricao == "" ? "Sua barraca ainda não tem descrição" : feirante.descricao)")
+                                Text("Descrição: \(vm.feiranteAtual.descricao == "" ? "Sua barraca ainda não tem descrição" : vm.feiranteAtual.descricao)")
                                     .font(.system(size: 16))
                                 
                             }
                             .foregroundColor(.gray)
                         }
                         .padding(.vertical,5)
-
                     }
                     .padding()
                     
@@ -60,8 +58,6 @@ struct PerfilFeiranteView: View {
                     NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigation)
                         .hidden()
                 }
-                
-                
             }
             .navigationTitle("Perfil")
             .toolbar {
@@ -74,15 +70,11 @@ struct PerfilFeiranteView: View {
                 }
             }
             .sheet(isPresented: $isShowingSheet) {
-                EditPerfilFeiranteView(feirante: feirante)
+                EditPerfilFeiranteView()
             }
             
         }
-//        .onAppear{
-//            vm.fetchFeirante(email: vm.feiranteAtualEmail){ feirante in
-//                self.feirante = feirante ?? Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
-//            }
-//        }
+        
         
         
     }
@@ -90,4 +82,5 @@ struct PerfilFeiranteView: View {
 
 #Preview {
     PerfilFeiranteView(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

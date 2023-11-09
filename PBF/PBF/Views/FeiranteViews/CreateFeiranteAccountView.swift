@@ -13,12 +13,13 @@ struct CreateFeiranteAccountView: View {
     @State var emailInput: String = ""
     @State var cpfInput: String = ""
     @State var passInput: String = ""
-        
+    @State var errorMessage: String = ""
+    
     //Variaveis para a animacao do botao
     @State private var isLoading = false
     @State private var isSuccess = false
     @State private var navigate = false
-
+    
     
     
     @EnvironmentObject var vm: ViewModel
@@ -68,17 +69,31 @@ struct CreateFeiranteAccountView: View {
                     }
                     .padding()
                     Spacer()
+                    
+                    if !errorMessage.isEmpty {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                    }
+                    
                     VStack{
                         VStack {
                             if !isLoading {
                                 Button("Criar Conta") {
+                                    
+                                    if emailInput.isEmpty || passInput.isEmpty {
+                                        // Configura a mensagem de erro
+                                        errorMessage = "Por favor, preencha todos os campos."
+                                        return // Sai da função para evitar que o resto do código seja executado
+                                    }
+                                    errorMessage = ""
+                                    
                                     withAnimation {
                                         isLoading = true
                                     }
                                     
                                     let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "")
                                     
-                                    vm.feiranteAtualEmail = emailInput
+                                    vm.feiranteAtual.email = emailInput
                                     
                                     vm.addFeirante(feirante: feirante) { success in
                                         if success {
@@ -115,10 +130,10 @@ struct CreateFeiranteAccountView: View {
                                 }
                             }
                         }
-
+                        
                         NavigationLink("", destination: HomeViewFeirante(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                             .hidden()
-
+                        
                     }
                     Spacer()
                 }

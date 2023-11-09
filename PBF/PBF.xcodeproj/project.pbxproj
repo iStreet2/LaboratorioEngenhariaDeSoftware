@@ -43,6 +43,7 @@
 		3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D22AB1EF750047FCE4 /* PBFApp.swift */; };
 		3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D62AB1EF760047FCE4 /* Assets.xcassets */; };
 		3B7570DA2AB1EF760047FCE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */; };
+		3B823F652AFC1B7000E97772 /* PackageTeste in Frameworks */ = {isa = PBXBuildFile; productRef = 3B823F642AFC1B7000E97772 /* PackageTeste */; };
 		3B83F7632AD6D048004F4789 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7622AD6D048004F4789 /* FirebaseDatabase */; };
 		3B83F7652AD6D048004F4789 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7642AD6D048004F4789 /* FirebaseDatabaseSwift */; };
 		3B83F7672AD6D057004F4789 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7662AD6D057004F4789 /* FirebaseFirestore */; };
@@ -117,6 +118,7 @@
 				3B59C0CE2AD6C3E8006C86CF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				3B59C0D02AD6C3E8006C86CF /* FirebaseAppCheck in Frameworks */,
 				3B59C0BC2AD6BFAD006C86CF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				3B823F652AFC1B7000E97772 /* PackageTeste in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +319,7 @@
 				3B83F7642AD6D048004F4789 /* FirebaseDatabaseSwift */,
 				3B83F7662AD6D057004F4789 /* FirebaseFirestore */,
 				3B83F7682AD6D057004F4789 /* FirebaseFirestoreSwift */,
+				3B823F642AFC1B7000E97772 /* PackageTeste */,
 			);
 			productName = PBF;
 			productReference = 3B7570CF2AB1EF750047FCE4 /* PBF.app */;
@@ -349,6 +352,7 @@
 			packageReferences = (
 				3B59C0B42AD6BFAD006C86CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3BBAB7962AD6CD4200C57128 /* XCRemoteSwiftPackageReference "aptabase-swift" */,
+				3B823F632AFC1B7000E97772 /* XCRemoteSwiftPackageReference "PackageTeste" */,
 			);
 			productRefGroup = 3B7570D02AB1EF750047FCE4 /* Products */;
 			projectDirPath = "";
@@ -625,6 +629,14 @@
 				minimumVersion = 10.16.0;
 			};
 		};
+		3B823F632AFC1B7000E97772 /* XCRemoteSwiftPackageReference "PackageTeste" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iStreet2/PackageTeste.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		3BBAB7962AD6CD4200C57128 /* XCRemoteSwiftPackageReference "aptabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aptabase/aptabase-swift.git";
@@ -685,6 +697,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B59C0B42AD6BFAD006C86CF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		3B823F642AFC1B7000E97772 /* PackageTeste */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B823F632AFC1B7000E97772 /* XCRemoteSwiftPackageReference "PackageTeste" */;
+			productName = PackageTeste;
 		};
 		3B83F7622AD6D048004F4789 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
