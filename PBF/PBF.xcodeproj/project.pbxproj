@@ -16,6 +16,7 @@
 		3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */; };
 		3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */; };
 		3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */; };
+		3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */; };
 		3B4032D32AE69F910020EEF3 /* Feirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D22AE69F910020EEF3 /* Feirante.swift */; };
 		3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D42AE6A02E0020EEF3 /* Produto.swift */; };
 		3B4032D72AE6A0E70020EEF3 /* Reserva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D62AE6A0E70020EEF3 /* Reserva.swift */; };
@@ -70,6 +71,7 @@
 		3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClientView.swift; sourceTree = "<group>"; };
 		3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeiranteView.swift; sourceTree = "<group>"; };
 		3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFeiraView.swift; sourceTree = "<group>"; };
 		3B4032D22AE69F910020EEF3 /* Feirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feirante.swift; sourceTree = "<group>"; };
 		3B4032D42AE6A02E0020EEF3 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
 		3B4032D62AE6A0E70020EEF3 /* Reserva.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva.swift; sourceTree = "<group>"; };
@@ -159,6 +161,15 @@
 				3BE3165C2AE811F400294EF9 /* ClienteCiews */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3B2AAEB02B055B670078F050 /* FeirasViews */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
+				3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */,
+			);
+			path = FeirasViews;
 			sourceTree = "<group>";
 		};
 		3B4C846A2AE73DE600997209 /* Controller */ = {
@@ -279,7 +290,7 @@
 				3B17CE592AD6DDA200B8D895 /* CreateClientAccountView.swift */,
 				3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */,
 				3B4C84682AE6D84200997209 /* HomeViewCliente.swift */,
-				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
+				3B2AAEB02B055B670078F050 /* FeirasViews */,
 				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
 				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
 			);
@@ -385,6 +396,7 @@
 				3B59FA102AE93FCB00AE5C72 /* FullItemView.swift in Sources */,
 				3BE316622AE929B900294EF9 /* ItensView.swift in Sources */,
 				3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */,
+				3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */,
 				3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */,
 				3BE316682AE92E7100294EF9 /* AddItemSheetView.swift in Sources */,
 				3B7320FE2AFBC4FF00446266 /* EditPerfilFeiranteView.swift in Sources */,

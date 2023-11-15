@@ -1,14 +1,16 @@
 //
-//  TabView.swift
+//  BarracasView.swift
 //  PBF
 //
-//  Created by Gabriel Vicentin Negro on 23/10/23.
+//  Created by Laura C. Balbachan dos Santos on 10/10/23.
 //
 
 import SwiftUI
 import CoreData
 
-struct HomeViewCliente: View {
+struct FeirasView: View {
+    
+    @EnvironmentObject var vm: ViewModel
     
     //Coisa do CoreData
     @Environment(\.managedObjectContext) var context //Contexto, DataController
@@ -25,25 +27,25 @@ struct HomeViewCliente: View {
     
     
     var body: some View {
-        TabView {
-            FeirasView(context: context)
-                .tabItem {
-                    Label("Feiras", systemImage: "storefront")
+        NavigationView {
+            ScrollView {
+                VStack {
+                    ForEach(0 ..< vm.feirantes.count, id: \.self) { i in
+                        NavigationLink {
+                            FullFeiraView(i: i)
+                        } label: {
+                            BarracaCard(nome: vm.feirantes[i].nomeBanca,descricao: vm.feirantes[i].descricao)
+                        }
+                    }
                 }
-            
-            CartView()
-                .tabItem {
-                    Label("Carrinho", systemImage: "cart")
-                }
-            
-            ProfileView(context: context)
-                .tabItem {
-                    Label("Perfil", systemImage: "person")
-                }
+            }
+            .navigationTitle("Feiras")
         }
+        
     }
 }
 
 #Preview {
-    HomeViewCliente(context: DataController().container.viewContext)
+    FeirasView(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

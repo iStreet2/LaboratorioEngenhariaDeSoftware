@@ -65,4 +65,5 @@ struct ItensView: View {
 
 #Preview {
     ItensView(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

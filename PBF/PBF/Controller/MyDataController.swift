@@ -112,5 +112,25 @@ class MyDataController: ObservableObject{
             print("Erro ao deletar todos os dados de Cliente: \(error.localizedDescription)")
         }
     }
+    
+    func getEmailCliente() -> String?{
+        let fetchRequest: NSFetchRequest<ClienteData> = ClienteData.fetchRequest()
+        
+        do {
+            let clientes = try context.fetch(fetchRequest)
+            
+            // Retorna o e-mail do primeiro feirante encontrado.
+            if let cliente = clientes.first {
+                return cliente.email
+            } else {
+                // Se não encontrar nenhum feirante, retorna nil.
+                return nil
+            }
+            
+        } catch {
+            print("Erro ao buscar e-mail do cliente: \(error.localizedDescription)")
+            return nil
+        }
+    }
 
 }

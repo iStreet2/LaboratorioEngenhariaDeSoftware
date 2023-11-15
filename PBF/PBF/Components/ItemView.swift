@@ -14,25 +14,29 @@ struct ItemView: View {
     
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack{
-                Text(titulo)
-                    .frame(alignment: .leading)
-                    .bold()
+        if titulo == ""{
+            
+        }else{
+            VStack(alignment: .leading) {
+                HStack{
+                    Text(titulo)
+                        .frame(alignment: .leading)
+                        .bold()
+                    Spacer()
+                }
                 Spacer()
+                Text("R$\(preco)")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                Text("Quantidade: \(quantidade)")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
             }
-            Spacer()
-            Text("R$\(preco)")
-                .font(.footnote)
-                .foregroundColor(.gray)
-            Text("Quantidade: \(quantidade)")
-                .font(.footnote)
-                .foregroundColor(.gray)
+            .frame(width:130,height: 80)
+            .padding(10)
+            .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.3)))
+            .padding([.top, .horizontal])
         }
-        .frame(width:130,height: 80)
-        .padding(10)
-        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.3)))
-        .padding([.top, .horizontal])
     }
 }
 #Preview {

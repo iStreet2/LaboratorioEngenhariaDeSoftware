@@ -104,10 +104,10 @@ struct LoginFeiranteView: View {
                                 withAnimation {
                                     isSuccess = true
                                     wrongPass = false
-                                    vm.feiranteAtual.email = loginInput
-                                    vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){
-                                        
+                                    vm.fetchFeirante(email:loginInput){feirante in
+                                        vm.feiranteAtual = feirante ?? vm.feiranteAtual
                                     }
+                                    vm.fetchProdutosDoFeirante(emailFeirante: loginInput){}
                                 }
                                 vm.getFeiranteID(email: loginInput) { feiranteID in
                                     if let id = feiranteID {
@@ -159,16 +159,7 @@ struct LoginFeiranteView: View {
                 NavigationLink("", destination: HomeViewFeirante(context: context).navigationBarBackButtonHidden(true), isActive: $navigate)
                     .hidden()
                 
-                
-                
                 Spacer()
-                // Botão para continuar
-                
-                
-                //                NavigationLink("Login") {
-                //                    FeirasView()
-                //                }
-                //                .buttonStyle(PBFButtonSyle())
                 
             }
             .padding()

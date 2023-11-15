@@ -14,37 +14,42 @@ class ViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-//    @Published var feiranteAtualEmail: String = "zerado"
-//    @Published var clienteAtualEmail: String = "zerado"
+    //    @Published var feiranteAtualEmail: String = "zerado"
+    //    @Published var clienteAtualEmail: String = "zerado"
     @Published var feiranteAtual: Feirante = Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
     @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
-    @Published var produtos: [Produto] = [Produto(nome:"Atum", preco: "13,00", quantidade: 3, descricao: "Atum do bom", feiranteEmail: "")]
+    
+    @Published var produtos: [Produto] = [Produto(nome:"", preco: "", quantidade: 0, descricao: "", feiranteEmail: "")]
+    @Published var feirantes: [Feirante] = [Feirante(nome: "Jorge", email: "a", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!")]
     
     //Funções de Feirantes
     
-    func fetchFeirantes(completion: @escaping ([Feirante]) -> ()) { //Funcao que retorna um vetor de todos os feirantes do meu banco de dados
-        db.collection("feirantes").getDocuments() { (querySnapshot, err) in
+    func fetchFeirantes() { //Pega todos os feirantes do meu banco de dados e coloca no meu vetor da ViewModel feirantes
+        db.collection("feirantes").getDocuments() { [weak self] (querySnapshot, err) in
             if let err = err {
                 print("Erro ao obter feirantes: \(err)")
             } else {
-                var feirantes: [Feirante] = []
+                var feirantesTemp: [Feirante] = []
                 for document in querySnapshot!.documents {
                     let data = document.data()
                     let feirante = Feirante(
                         id: document.documentID,
-                        nome: data["nome"] as! String,
-                        email: data["email"] as! String,
-                        telefone: data["telefone"] as! String,
-                        senha: data["senha"] as! String,
-                        nomeBanca: data["nomeBanca"] as! String,
-                        tiposDeProduto: data["tiposDeProduto"] as! String,
-                        descricao: data["descricao"] as! String)
-                    feirantes.append(feirante)
+                        nome: data["nome"] as? String ?? "",
+                        email: data["email"] as? String ?? "",
+                        telefone: data["telefone"] as? String ?? "",
+                        senha: data["senha"] as? String ?? "",
+                        nomeBanca: data["nomeBanca"] as? String ?? "",
+                        tiposDeProduto: data["tiposDeProduto"] as? String ?? "",
+                        descricao: data["descricao"] as? String ?? "")
+                    feirantesTemp.append(feirante)
                 }
-                completion(feirantes)
+                DispatchQueue.main.async {
+                    self?.feirantes = feirantesTemp
+                }
             }
         }
     }
+    
     
     func fetchFeirante(email: String, completion: @escaping (Feirante?) -> Void) {
         db.collection("feirantes").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
@@ -53,13 +58,13 @@ class ViewModel: ObservableObject {
                 completion(nil)
                 return
             }
-
+            
             guard let document = querySnapshot?.documents.first else {
                 print("Feirante não encontrado.")
                 completion(nil)
                 return
             }
-
+            
             do {
                 var feirante = try document.data(as: Feirante.self)
                 feirante.id = document.documentID
@@ -70,32 +75,33 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
-
+    
+    
     
     func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping () -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
-            db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
-                if let error = error {
-                    print("Erro ao buscar produtos: \(error.localizedDescription)")
-                } else {
-                    var produtosTemp: [Produto] = []
-                    for document in querySnapshot!.documents {
-                        let data = document.data()
-                        let produto = Produto(
-                            id: document.documentID,
-                            nome: data["nome"] as! String,
-                            preco: data["preço"] as! String,
-                            quantidade: data["quantidade"] as! Int,
-                            descricao: data["descricao"] as! String,
-                            feiranteEmail: data["feiranteEmail"] as! String
-                        )
-                        produtosTemp.append(produto)
-                    }
-                    self.produtos = produtosTemp
-                    completion()
+        self.produtos = []
+        db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Erro ao buscar produtos: \(error.localizedDescription)")
+            } else {
+                var produtosTemp: [Produto] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let produto = Produto(
+                        id: document.documentID,
+                        nome: data["nome"] as! String,
+                        preco: data["preço"] as! String,
+                        quantidade: data["quantidade"] as! Int,
+                        descricao: data["descricao"] as! String,
+                        feiranteEmail: data["feiranteEmail"] as! String
+                    )
+                    produtosTemp.append(produto)
                 }
+                self.produtos = produtosTemp
+                completion()
             }
         }
+    }
     
     
     func addFeirante(feirante: Feirante, completion: @escaping (Bool) -> Void) {
@@ -127,7 +133,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
     
     
     func deleteFeirante(id: String) {
@@ -200,10 +206,10 @@ class ViewModel: ObservableObject {
             completion(false)
             return
         }
-
+        
         // Referência ao documento do feirante
         let feiranteRef = db.collection("feirantes").document(feiranteId)
-
+        
         // Atualize os dados do feirante
         feiranteRef.updateData([
             "nome": feirante.nome,
@@ -221,7 +227,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
     
     
     //--------------------------------------------------------------------------------------------------------------
@@ -331,6 +337,31 @@ class ViewModel: ObservableObject {
             }
     }
     
+    func fetchCliente(email: String, completion: @escaping (Cliente?) -> Void) {
+        db.collection("clientes").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Erro ao buscar cliente: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let document = querySnapshot?.documents.first else {
+                print("Cliente não encontrado.")
+                completion(nil)
+                return
+            }
+            
+            do {
+                var cliente = try document.data(as: Cliente.self)
+                cliente.id = document.documentID
+                completion(cliente)
+            } catch {
+                print("Erro ao decodificar cliente: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     //Funções Produtos ----------------------------------------------------------
     
     func criarProduto(product: Produto, completion: @escaping (Error?) -> Void) {
@@ -352,10 +383,10 @@ class ViewModel: ObservableObject {
             completion(false)
             return
         }
-
+        
         // Referência ao documento do feirante
         let produtoRef = db.collection("produtos").document(produtoId)
-
+        
         // Atualize os dados do feirante
         produtoRef.updateData([
             "nome": produto.nome,

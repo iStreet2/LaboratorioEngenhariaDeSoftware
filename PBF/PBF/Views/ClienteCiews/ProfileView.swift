@@ -9,6 +9,9 @@ import SwiftUI
 import CoreData
 
 struct ProfileView: View {
+    
+    @State var navigation = false
+    
     @EnvironmentObject var vm: ViewModel
     
     @Environment(\.managedObjectContext) var context //Contexto, DataController
@@ -29,15 +32,19 @@ struct ProfileView: View {
                 VStack {
                     Button {
                         myDataController.deleteAllClienteData()
+                        navigation.toggle()
                     } label: {
                         Text("Esquecer Login")
                     }
+                    .padding()
+                    NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigation)
+                        .hidden()
                 }
             }
             .navigationTitle("Perfil")
         }
         
-
+        
     }
 }
 

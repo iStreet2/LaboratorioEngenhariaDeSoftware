@@ -109,6 +109,10 @@ struct LoginClientView: View {
                                 withAnimation {
                                     isSuccess = true
                                     wrongPass = false
+                                    vm.fetchCliente(email: loginInput){ cliente in
+                                        vm.clienteAtual = cliente ?? vm.clienteAtual
+                                    }
+                                    vm.fetchFeirantes() //Adiciono todos os feirantes do banco de dados para o cliente fer as barracas
                                 }
                                 
                                 

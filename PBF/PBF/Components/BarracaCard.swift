@@ -8,35 +8,33 @@
 import SwiftUI
 
 struct BarracaCard: View {
+    var nome: String
+    var descricao: String
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
-            // Título
-            Text("Nome da Barraca")
-                .font(.system(size: 20))
-                .foregroundStyle(.gray)
-                .padding(.bottom, 10)
-                
-            
-            // Imagem
-            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                .frame(width: 180, height: 170)
-            
-            // Descrição
-            Text("Descrição")
-                .multilineTextAlignment(.leading)
-                .lineLimit(2)
-                .padding(.vertical, 10)
-            
+            HStack{
+                Text(nome)
+                    .frame(alignment: .leading)
+                    .bold()
+                    .padding(.bottom)
+                Spacer()
+            }
+            HStack{
+                Text(descricao)
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                Spacer()
+            }
         }
-        .padding(.vertical, 33)
-        .padding(.horizontal, 15)
-        .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.black, lineWidth: 0.5)
-        )
+        .frame(minWidth: 300,minHeight: 80)
+        .padding(10)
+        .background(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.3)))
+        .padding([.top, .horizontal])
     }
 }
 
 #Preview {
-    BarracaCard()
+    BarracaCard(nome: "Barraca do seu jorge amigao de todos", descricao: "A melhor barraca que encontrará por aqui dsdadwadsadwadsadsa!")
 }

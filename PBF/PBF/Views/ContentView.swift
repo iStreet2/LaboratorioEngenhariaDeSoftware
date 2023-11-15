@@ -62,12 +62,14 @@ struct ContentView: View {
                         HomeViewCliente(context: context)
                             .navigationBarBackButtonHidden(true)
                             .onAppear{
-                                //Implementar buscar email do CoreData no database e colocar no vm.clienteAtual
-//                                if let clienteEmail = myDataController.getEmailCliente() {
-//                                    vm.clienteAtualEmail = clienteEmail
-//                                } else {
-//                                    print("Nenhum email de feirante encontrado no CoreData.")
-//                                }
+                                if let clienteEmail = myDataController.getEmailCliente() {
+                                    vm.fetchCliente(email: clienteEmail) { cliente in
+                                        vm.clienteAtual = cliente ?? vm.clienteAtual
+                                        vm.fetchFeirantes()
+                                    }
+                                } else {
+                                    print("Nenhum email de feirante encontrado no CoreData.")
+                                }
                             }
                     }else{
                         LoginClientView(context: context)
