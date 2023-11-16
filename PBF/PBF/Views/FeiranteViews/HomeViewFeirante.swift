@@ -45,4 +45,5 @@ struct HomeViewFeirante: View {
 
 #Preview {
     HomeViewFeirante(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

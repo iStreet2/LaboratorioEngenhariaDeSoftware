@@ -10,6 +10,8 @@ import CoreData
 
 struct HomeViewCliente: View {
     
+    @EnvironmentObject var vm: ViewModel
+    
     //Coisa do CoreData
     @Environment(\.managedObjectContext) var context //Contexto, DataController
     
@@ -18,6 +20,8 @@ struct HomeViewCliente: View {
     
     @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
     @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    
     
     init(context: NSManagedObjectContext) {
         self.myDataController = MyDataController(context: context)
@@ -41,9 +45,11 @@ struct HomeViewCliente: View {
                     Label("Perfil", systemImage: "person")
                 }
         }
+        
     }
 }
 
 #Preview {
     HomeViewCliente(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

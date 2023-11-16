@@ -27,27 +27,46 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
-                VStack {
-                    Button {
-                        myDataController.deleteAllClienteData()
-                        navigation.toggle()
-                    } label: {
-                        Text("Esquecer Login")
+                VStack (alignment:.leading){
+                    Group{
+                        Text("\(vm.clienteAtual.nome == "" ? "Erro ao mostrar o nome" : vm.clienteAtual.nome)")
+                            .font(.system(size:24))
+                            .bold()
+                        Group{
+                            Text("Nome da barra: \(vm.feiranteAtual.nomeBanca == "" ? "Sua barraca ainda não possui um nome" : vm.feiranteAtual.nomeBanca )")
+                            
+                            Text("Descrição: \(vm.feiranteAtual.descricao == "" ? "Sua barraca ainda não tem descrição" : vm.feiranteAtual.descricao)")
+                                .font(.system(size: 16))
+                            
+                        }
+                        .foregroundColor(.gray)
                     }
-                    .padding()
-                    NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigation)
-                        .hidden()
+                    .padding(.vertical,5)
                 }
+                .padding()
+                
+                Button {
+                    myDataController.deleteAllClienteData()
+                    navigation.toggle()
+                } label: {
+                    Text("Esquecer Login")
+                }
+                NavigationLink("", destination: ContentView(context: context).navigationBarBackButtonHidden(true), isActive: $navigation)
+                    .hidden()
             }
             .navigationTitle("Perfil")
+            .onAppear{
+                vm.pedidosLoaded = false
+            }
         }
-        
         
     }
 }
 
+
 #Preview {
     ProfileView(context: DataController().container.viewContext)
+        .environmentObject(ViewModel())
 }

@@ -21,6 +21,7 @@ struct FeirasView: View {
     @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
     @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
     
+    
     init(context: NSManagedObjectContext) {
         self.myDataController = MyDataController(context: context)
     }
@@ -32,13 +33,31 @@ struct FeirasView: View {
                 VStack {
                     ForEach(0 ..< vm.feirantes.count, id: \.self) { i in
                         NavigationLink {
-                            FullFeiraView(i: i)
+                            FullFeiraView(f: i)
                         } label: {
-                            BarracaCard(nome: vm.feirantes[i].nomeBanca,descricao: vm.feirantes[i].descricao)
+                            if vm.feirantesLoaded{
+                                BarracaCard(nome: vm.feirantes[i].nomeBanca,descricao: vm.feirantes[i].descricao)
+                            }
                         }
+                    }
+                    if vm.feirantesLoaded == false{
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.black))
                     }
                 }
             }
+            .onAppear{
+                vm.produtosLoaded = false
+                vm.pedidosLoaded = false
+            }
+            .refreshable(action: {
+                vm.feirantesLoaded = false
+                vm.fetchFeirantes() { success in
+                    if success {
+                        vm.pedidosLoaded = true
+                    }
+                }
+            })
             .navigationTitle("Feiras")
         }
         

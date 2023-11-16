@@ -10,7 +10,7 @@ import SwiftUI
 struct FullFeiraView: View {
     @EnvironmentObject var vm: ViewModel
     @State var isShowingSheet = false
-    @State var i: Int
+    @State var f: Int
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 2)
     
     var body: some View {
@@ -18,11 +18,12 @@ struct FullFeiraView: View {
             VStack(alignment: .leading){
                 VStack(alignment:.leading){
                     Group{
-                        Text("Nome do feirante: \(vm.feirantes[i].nome)")
-                        
-                        Text("Descrição: \(vm.feirantes[i].descricao == "" ? "Essa barraca ainda não tem descrição" : vm.feirantes[i].descricao)")
-                        
-                        
+                        Text("Nome do feirante:")
+                            .bold()
+                        Text(vm.feirantes[f].nome)
+                        Text("Descrição:")
+                            .bold()
+                        Text("\(vm.feirantes[f].descricao == "" ? "Essa barraca ainda não tem descrição" : vm.feirantes[f].descricao)")
                     }
                     .font(.title2)
                     .padding(.vertical,5)
@@ -33,28 +34,38 @@ struct FullFeiraView: View {
                         .font(.title)
                         .bold()
                     LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(0 ..< vm.produtos.count, id: \.self) { i in
+                        ForEach(0 ..< vm.produtos.count, id: \.self) { p in
                             NavigationLink {
                                 VStack{
-                                    Text("Hello World")
+                                    FullItemClienteView(f: f, produto: vm.produtos[p])
                                 }
                             } label: {
-                                ItemView(titulo: vm.produtos[i].nome, preco: vm.produtos[i].preco, quantidade: vm.produtos[i].quantidade)
+                                if vm.produtosLoaded{
+                                    ItemView(titulo: vm.produtos[p].nome, preco: vm.produtos[p].preco, quantidade: vm.produtos[p].quantidade)
+                                }
                             }
                         }
                     }
                 }
                 .padding()
             }
-        }.navigationTitle("\(vm.feirantes[i].nomeBanca == "" ? "Essa barraca ainda não possui um nome" : vm.feirantes[i].nomeBanca)")
+            if !vm.produtosLoaded{
+                ProgressView()
+            }
+        }
+        .navigationTitle("\(vm.feirantes[f].nomeBanca == "" ? "Essa barraca ainda não possui um nome" : vm.feirantes[f].nomeBanca)")
         .onAppear{
-            vm.fetchProdutosDoFeirante(emailFeirante: vm.feirantes[i].email){}
+            vm.fetchProdutosDoFeirante(emailFeirante: vm.feirantes[f].email){ success in
+                if success{
+                    vm.produtosLoaded = true
+                }
+            }
         }
         
     }
 }
 
 #Preview {
-    FullFeiraView(i: 0)
+    FullFeiraView(f: 0)
         .environmentObject(ViewModel())
 }

@@ -25,6 +25,7 @@ struct BarracaCard: View {
                 Text(descricao)
                     .font(.footnote)
                     .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
         }

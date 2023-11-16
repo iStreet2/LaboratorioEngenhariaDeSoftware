@@ -19,7 +19,7 @@
 		3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */; };
 		3B4032D32AE69F910020EEF3 /* Feirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D22AE69F910020EEF3 /* Feirante.swift */; };
 		3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D42AE6A02E0020EEF3 /* Produto.swift */; };
-		3B4032D72AE6A0E70020EEF3 /* Reserva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D62AE6A0E70020EEF3 /* Reserva.swift */; };
+		3B4032D72AE6A0E70020EEF3 /* Pedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D62AE6A0E70020EEF3 /* Pedido.swift */; };
 		3B4032DA2AE6A1EC0020EEF3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D82AE6A1EC0020EEF3 /* Model.xcdatamodeld */; };
 		3B4032DC2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032DB2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift */; };
 		3B4C84692AE6D84200997209 /* HomeViewCliente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C84682AE6D84200997209 /* HomeViewCliente.swift */; };
@@ -40,6 +40,7 @@
 		3B59C0D02AD6C3E8006C86CF /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 3B59C0CF2AD6C3E8006C86CF /* FirebaseAppCheck */; };
 		3B59FA102AE93FCB00AE5C72 /* FullItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59FA0F2AE93FCB00AE5C72 /* FullItemView.swift */; };
 		3B59FA132AE947BD00AE5C72 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B59FA122AE947BC00AE5C72 /* EditItemView.swift */; };
+		3B61542F2B0626390024C6C7 /* FullItemClienteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B61542E2B0626390024C6C7 /* FullItemClienteView.swift */; };
 		3B7320FE2AFBC4FF00446266 /* EditPerfilFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7320FD2AFBC4FF00446266 /* EditPerfilFeiranteView.swift */; };
 		3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7570D22AB1EF750047FCE4 /* PBFApp.swift */; };
 		3B7570D72AB1EF760047FCE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7570D62AB1EF760047FCE4 /* Assets.xcassets */; };
@@ -51,6 +52,9 @@
 		3B83F7692AD6D057004F4789 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7682AD6D057004F4789 /* FirebaseFirestoreSwift */; };
 		3BBAB7982AD6CD4300C57128 /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3BBAB7972AD6CD4300C57128 /* Aptabase */; };
 		3BBAB79A2AD6CD5500C57128 /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3BBAB7992AD6CD5500C57128 /* Aptabase */; };
+		3BBC10322B0629F10082B931 /* FazerPedidoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBC10312B0629F10082B931 /* FazerPedidoSheetView.swift */; };
+		3BBC10342B064B7E0082B931 /* PedidoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBC10332B064B7E0082B931 /* PedidoView.swift */; };
+		3BBC10362B0653560082B931 /* CartSheetHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBC10352B0653560082B931 /* CartSheetHistoryView.swift */; };
 		3BE3165A2AE8117B00294EF9 /* HomeViewFeirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */; };
 		3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3165D2AE9272000294EF9 /* CheckBoxStyle.swift */; };
 		3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3165F2AE9298A00294EF9 /* PedidosView.swift */; };
@@ -74,7 +78,7 @@
 		3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFeiraView.swift; sourceTree = "<group>"; };
 		3B4032D22AE69F910020EEF3 /* Feirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feirante.swift; sourceTree = "<group>"; };
 		3B4032D42AE6A02E0020EEF3 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
-		3B4032D62AE6A0E70020EEF3 /* Reserva.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reserva.swift; sourceTree = "<group>"; };
+		3B4032D62AE6A0E70020EEF3 /* Pedido.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedido.swift; sourceTree = "<group>"; };
 		3B4032D92AE6A1EC0020EEF3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3B4032DB2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFeiranteAccountView.swift; sourceTree = "<group>"; };
 		3B4C84682AE6D84200997209 /* HomeViewCliente.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCliente.swift; sourceTree = "<group>"; };
@@ -85,11 +89,15 @@
 		3B59C0C52AD6C335006C86CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		3B59FA0F2AE93FCB00AE5C72 /* FullItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullItemView.swift; sourceTree = "<group>"; };
 		3B59FA122AE947BC00AE5C72 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
+		3B61542E2B0626390024C6C7 /* FullItemClienteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullItemClienteView.swift; sourceTree = "<group>"; };
 		3B7320FD2AFBC4FF00446266 /* EditPerfilFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPerfilFeiranteView.swift; sourceTree = "<group>"; };
 		3B7570CF2AB1EF750047FCE4 /* PBF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBF.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B7570D22AB1EF750047FCE4 /* PBFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFApp.swift; sourceTree = "<group>"; };
 		3B7570D62AB1EF760047FCE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3BBC10312B0629F10082B931 /* FazerPedidoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FazerPedidoSheetView.swift; sourceTree = "<group>"; };
+		3BBC10332B064B7E0082B931 /* PedidoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoView.swift; sourceTree = "<group>"; };
+		3BBC10352B0653560082B931 /* CartSheetHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSheetHistoryView.swift; sourceTree = "<group>"; };
 		3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFeirante.swift; sourceTree = "<group>"; };
 		3BE3165D2AE9272000294EF9 /* CheckBoxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxStyle.swift; sourceTree = "<group>"; };
 		3BE3165F2AE9298A00294EF9 /* PedidosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosView.swift; sourceTree = "<group>"; };
@@ -132,6 +140,7 @@
 			children = (
 				3B17CE4D2AD6DCD400B8D895 /* BarracaCard.swift */,
 				3BE316652AE92BA900294EF9 /* ItemView.swift */,
+				3BBC10332B064B7E0082B931 /* PedidoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -168,6 +177,9 @@
 			children = (
 				3B17CE5B2AD6DDB500B8D895 /* FeirasView.swift */,
 				3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */,
+				3B61542E2B0626390024C6C7 /* FullItemClienteView.swift */,
+				3BBC10312B0629F10082B931 /* FazerPedidoSheetView.swift */,
+				3BBC10372B0653590082B931 /* CartViews */,
 			);
 			path = FeirasViews;
 			sourceTree = "<group>";
@@ -187,7 +199,7 @@
 				3B59C0C22AD6C07A006C86CF /* Cliente.swift */,
 				3B4032D22AE69F910020EEF3 /* Feirante.swift */,
 				3B4032D42AE6A02E0020EEF3 /* Produto.swift */,
-				3B4032D62AE6A0E70020EEF3 /* Reserva.swift */,
+				3B4032D62AE6A0E70020EEF3 /* Pedido.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +283,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3BBC10372B0653590082B931 /* CartViews */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
+				3BBC10352B0653560082B931 /* CartSheetHistoryView.swift */,
+			);
+			path = CartViews;
+			sourceTree = "<group>";
+		};
 		3BE3165B2AE811EE00294EF9 /* FeiranteViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +312,6 @@
 				3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */,
 				3B4C84682AE6D84200997209 /* HomeViewCliente.swift */,
 				3B2AAEB02B055B670078F050 /* FeirasViews */,
-				3B17CE552AD6DD7C00B8D895 /* CartView.swift */,
 				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
 			);
 			path = ClienteCiews;
@@ -396,10 +416,13 @@
 				3B59FA102AE93FCB00AE5C72 /* FullItemView.swift in Sources */,
 				3BE316622AE929B900294EF9 /* ItensView.swift in Sources */,
 				3B17CE5C2AD6DDB500B8D895 /* FeirasView.swift in Sources */,
+				3BBC10322B0629F10082B931 /* FazerPedidoSheetView.swift in Sources */,
 				3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */,
 				3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */,
 				3BE316682AE92E7100294EF9 /* AddItemSheetView.swift in Sources */,
+				3BBC10362B0653560082B931 /* CartSheetHistoryView.swift in Sources */,
 				3B7320FE2AFBC4FF00446266 /* EditPerfilFeiranteView.swift in Sources */,
+				3BBC10342B064B7E0082B931 /* PedidoView.swift in Sources */,
 				3B17CE5E2AD6DDC300B8D895 /* LoginClientView.swift in Sources */,
 				3B4032DA2AE6A1EC0020EEF3 /* Model.xcdatamodeld in Sources */,
 				3B4C846E2AE73E3D00997209 /* MyDataController.swift in Sources */,
@@ -413,6 +436,7 @@
 				3B59FA132AE947BD00AE5C72 /* EditItemView.swift in Sources */,
 				3B4C84692AE6D84200997209 /* HomeViewCliente.swift in Sources */,
 				3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */,
+				3B61542F2B0626390024C6C7 /* FullItemClienteView.swift in Sources */,
 				3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */,
 				3B17CE5A2AD6DDA200B8D895 /* CreateClientAccountView.swift in Sources */,
 				3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */,
@@ -420,7 +444,7 @@
 				3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */,
 				3BE316662AE92BA900294EF9 /* ItemView.swift in Sources */,
 				3B4032DC2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift in Sources */,
-				3B4032D72AE6A0E70020EEF3 /* Reserva.swift in Sources */,
+				3B4032D72AE6A0E70020EEF3 /* Pedido.swift in Sources */,
 				3B59C0C32AD6C07A006C86CF /* Cliente.swift in Sources */,
 				3B4032D32AE69F910020EEF3 /* Feirante.swift in Sources */,
 			);

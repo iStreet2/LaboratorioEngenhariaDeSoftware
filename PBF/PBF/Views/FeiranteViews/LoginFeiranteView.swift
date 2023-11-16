@@ -107,7 +107,8 @@ struct LoginFeiranteView: View {
                                     vm.fetchFeirante(email:loginInput){feirante in
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual
                                     }
-                                    vm.fetchProdutosDoFeirante(emailFeirante: loginInput){}
+                                    vm.fetchProdutosDoFeirante(emailFeirante: loginInput){ _ in
+                                    }
                                 }
                                 vm.getFeiranteID(email: loginInput) { feiranteID in
                                     if let id = feiranteID {

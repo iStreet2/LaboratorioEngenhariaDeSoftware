@@ -11,7 +11,6 @@ import CoreData
 struct ContentView: View {
     @EnvironmentObject var vm: ViewModel
     
-    
     //Coisa do CoreData
     @Environment(\.managedObjectContext) var context //Contexto, DataController
     
@@ -42,7 +41,7 @@ struct ContentView: View {
                                 if let feiranteEmail = myDataController.getEmailFeirante() { //Coloco  meu feirante atual o que esta logando direto
                                     vm.fetchFeirante(email: feiranteEmail){ feirante in//Procuro no meu DataBase um feirante com o email que esta no coredata
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual //Aqui eu coloco meu feirante atual da ViewModel igual o feirante que eu achei no meu database baseado no email do CoreData
-                                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){ //Atualizo meu vetor de produtos local com o email do feirante que eu achei
+                                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){ _ in //Atualizo meu vetor de produtos local com o email do feirante que eu achei
                                         }
                                     }
                                     
@@ -65,7 +64,11 @@ struct ContentView: View {
                                 if let clienteEmail = myDataController.getEmailCliente() {
                                     vm.fetchCliente(email: clienteEmail) { cliente in
                                         vm.clienteAtual = cliente ?? vm.clienteAtual
-                                        vm.fetchFeirantes()
+                                        vm.fetchFeirantes(){ success in
+                                            if success{
+                                                vm.feirantesLoaded = true
+                                            }
+                                        }
                                     }
                                 } else {
                                     print("Nenhum email de feirante encontrado no CoreData.")

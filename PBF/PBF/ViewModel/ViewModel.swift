@@ -14,20 +14,29 @@ class ViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    //    @Published var feiranteAtualEmail: String = "zerado"
-    //    @Published var clienteAtualEmail: String = "zerado"
+    //Variáveis de feirante
     @Published var feiranteAtual: Feirante = Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
-    @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
     
-    @Published var produtos: [Produto] = [Produto(nome:"", preco: "", quantidade: 0, descricao: "", feiranteEmail: "")]
-    @Published var feirantes: [Feirante] = [Feirante(nome: "Jorge", email: "a", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!")]
+    
+    //Variáveis do cliente
+    @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
+    @Published var feirantes: [Feirante] = [Feirante(nome: "Jorge", email: "a", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui! Alguma coisa para o texto"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!")]
+    @Published var feirantesLoaded = false
+    @Published var produtosLoaded = false
+    @Published var pedidosLoaded = false
+    @Published var pedidosCliente: [Pedido] = [Pedido(id: "", produtoId: "", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
+    
+    //Variáveis para os dois
+    @Published var produtos: [Produto] = [Produto(nome:"", preco: "", quantidade: 1, descricao: "", feiranteEmail: "")]
+    
     
     //Funções de Feirantes
     
-    func fetchFeirantes() { //Pega todos os feirantes do meu banco de dados e coloca no meu vetor da ViewModel feirantes
+    func fetchFeirantes(completion: @escaping (Bool) -> Void) { //Pega todos os feirantes do meu banco de dados e coloca no meu vetor da ViewModel feirantes
         db.collection("feirantes").getDocuments() { [weak self] (querySnapshot, err) in
             if let err = err {
                 print("Erro ao obter feirantes: \(err)")
+                completion(false)
             } else {
                 var feirantesTemp: [Feirante] = []
                 for document in querySnapshot!.documents {
@@ -45,6 +54,7 @@ class ViewModel: ObservableObject {
                 }
                 DispatchQueue.main.async {
                     self?.feirantes = feirantesTemp
+                    completion(true)
                 }
             }
         }
@@ -78,11 +88,12 @@ class ViewModel: ObservableObject {
     
     
     
-    func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping () -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
+    func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping (Bool) -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
         self.produtos = []
         db.collection("produtos").whereField("feiranteEmail", isEqualTo: emailFeirante).getDocuments { (querySnapshot, error) in
             if let error = error {
                 print("Erro ao buscar produtos: \(error.localizedDescription)")
+                completion(false)
             } else {
                 var produtosTemp: [Produto] = []
                 for document in querySnapshot!.documents {
@@ -98,7 +109,7 @@ class ViewModel: ObservableObject {
                     produtosTemp.append(produto)
                 }
                 self.produtos = produtosTemp
-                completion()
+                completion(true)
             }
         }
     }
@@ -405,4 +416,66 @@ class ViewModel: ObservableObject {
         }
     }
     
+    //Funções Pedidos ------------------------------------------------------------------
+    
+    
+    
+    func addPedido(pedido: Pedido, completion: @escaping (Bool) -> Void) {
+        // Criando uma representação do pedido que será armazenada no Firestore
+        let dadosPedido = [
+            "produtoId": pedido.produtoId,
+            "produtoNome": pedido.produtoNome,
+            "clienteId": pedido.clienteId,
+            "feiranteId": pedido.feiranteId,
+            "quantidade": pedido.quantidade,
+            "observacao": pedido.observacao,
+            "estado": pedido.estado
+        ] as [String : Any]
+        
+        // Adicionando o pedido ao Firestore
+        db.collection("pedidos").addDocument(data: dadosPedido) { error in
+            if let error = error {
+                print("Erro ao adicionar pedido: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Pedido adicionado com sucesso.")
+                completion(true)
+            }
+        }
+    }
+    
+    func fetchPedidosDoCliente(clienteId: String, completion: @escaping (Bool) -> Void) {
+        db.collection("pedidos").whereField("clienteId", isEqualTo: clienteId).getDocuments() { [weak self] (querySnapshot, err) in
+            if let err = err {
+                print("Erro ao obter pedidos: \(err)")
+                completion(false)
+            } else {
+                var pedidosTemp: [Pedido] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let pedido = Pedido(
+                        id: document.documentID,
+                        produtoId: data["produtoId"] as? String ?? "",
+                        produtoNome: data["produtoNome"] as? String ?? "",
+                        clienteId: data["clienteId"] as? String ?? "",
+                        feiranteId: data["feiranteId"] as? String ?? "",
+                        quantidade: data["quantidade"] as? Int ?? 0,
+                        observacao: data["observacao"] as? String ?? "",
+                        estado: data["estado"] as? Int ?? 0
+                    )
+                    pedidosTemp.append(pedido)
+                }
+                DispatchQueue.main.async {
+                    self?.pedidosCliente = pedidosTemp
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    
 }
+
+
+
+

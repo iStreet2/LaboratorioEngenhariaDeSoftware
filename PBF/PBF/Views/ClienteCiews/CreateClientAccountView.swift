@@ -104,7 +104,9 @@ struct CreateClientAccountView: View {
                                     let cliente = Cliente(nome: nameInput, email: emailInput, telefone: "", senha: passInput, predio: apInput, apartamento: buildingInput)
                                     
                                     vm.clienteAtual = cliente
-                                    
+                                    vm.fetchFeirantes(){success in
+                                        vm.feirantesLoaded = true
+                                    }
                                     vm.addCliente(cliente: cliente) { success in
                                         if success {
                                             withAnimation {

@@ -20,7 +20,7 @@ struct ItemView: View {
             VStack(alignment: .leading) {
                 HStack{
                     Text(titulo)
-                        .frame(alignment: .leading)
+                        .multilineTextAlignment(.leading)
                         .bold()
                     Spacer()
                 }

@@ -112,7 +112,11 @@ struct LoginClientView: View {
                                     vm.fetchCliente(email: loginInput){ cliente in
                                         vm.clienteAtual = cliente ?? vm.clienteAtual
                                     }
-                                    vm.fetchFeirantes() //Adiciono todos os feirantes do banco de dados para o cliente fer as barracas
+                                    vm.fetchFeirantes(){ success in
+                                        vm.feirantesLoaded = true
+                                    }
+                                    
+                                    //Adiciono todos os feirantes do banco de dados para o cliente fer as barracas
                                 }
                                 
                                 
@@ -126,7 +130,7 @@ struct LoginClientView: View {
                                         print("Não foi possível obter o ID do feirante.")
                                     }
                                 }
-
+                                
                             } else {
                                 print("Senha incorreta ou Cliente não encontrado.")
                                 withAnimation {
@@ -157,7 +161,6 @@ struct LoginClientView: View {
                             .scaleEffect(1.5)
                     }
                 }
-                
             }
             
             // Aqui é onde você decidirá para qual View ir após um login bem-sucedido:

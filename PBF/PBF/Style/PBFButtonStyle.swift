@@ -15,12 +15,13 @@ struct PBFButtonSyle: ButtonStyle {
             .foregroundStyle(.white)
             .background(.black, in: Capsule())
             .opacity(configuration.isPressed ? 0.5 : 1)
+            .multilineTextAlignment(.center)
         
     }
 }
 
 #Preview {
-    Button("Criar Conta") {
+    Button("Começar Pedido!") {
     }
     .buttonStyle(PBFButtonSyle())
 }
