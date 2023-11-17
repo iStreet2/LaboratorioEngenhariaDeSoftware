@@ -15,16 +15,17 @@ class ViewModel: ObservableObject {
     private var db = Firestore.firestore()
     
     //Variáveis de feirante
-    @Published var feiranteAtual: Feirante = Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
-    
+    @Published var feiranteAtual: Feirante = Feirante(id: "eIGpjCOj6Qdmk0N0zk7o", nome: "Pobre", email: "", telefone: "", senha: "", nomeBanca: "Barraca do Pobre", tiposDeProduto: "", descricao: "Uma barraca humilde")
+    @Published var pedidosFeirante: [Pedido] = [Pedido(produtoId: "4F054D8E-67DD-47EA-9A4E-8D6C1691BE0B", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
+    @Published var pedidosFeiranteLoaded = false
     
     //Variáveis do cliente
     @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
     @Published var feirantes: [Feirante] = [Feirante(nome: "Jorge", email: "a", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui! Alguma coisa para o texto"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!")]
     @Published var feirantesLoaded = false
     @Published var produtosLoaded = false
-    @Published var pedidosLoaded = false
-    @Published var pedidosCliente: [Pedido] = [Pedido(id: "", produtoId: "", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
+    @Published var pedidosClienteLoaded = false
+    @Published var pedidosCliente: [Pedido] = [Pedido(produtoId: "0CC30D37-2411-48C1-9510-887F761ED2E3", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
     
     //Variáveis para os dois
     @Published var produtos: [Produto] = [Produto(nome:"", preco: "", quantidade: 1, descricao: "", feiranteEmail: "")]
@@ -86,6 +87,29 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func fetchFeiranteWithId(id: String, completion: @escaping (Feirante?) -> Void) {
+        db.collection("feirantes").document(id).getDocument { (documentSnapshot, error) in
+            if let error = error {
+                print("Erro ao buscar feirante: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+
+            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
+                print("Feirante não encontrado.")
+                completion(nil)
+                return
+            }
+
+            do {
+                let feirante = try documentSnapshot.data(as: Feirante.self)
+                completion(feirante)
+            } catch {
+                print("Erro ao decodificar feirante: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
     
     
     func fetchProdutosDoFeirante(emailFeirante: String, completion: @escaping (Bool) -> Void) {  //Funcao que aplica nos self.produtos todos os produtos do feirante atual
@@ -224,6 +248,7 @@ class ViewModel: ObservableObject {
         // Atualize os dados do feirante
         feiranteRef.updateData([
             "nome": feirante.nome,
+            "email": feirante.email,
             "telefone": feirante.telefone,
             "nomeBanca": feirante.nomeBanca,
             "tiposDeProduto": feirante.tiposDeProduto,
@@ -373,6 +398,59 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func editarCliente(cliente: Cliente, completion: @escaping (Bool) -> Void) {
+        // Verifique se o ID do feirante está presente
+        guard let clienteId = cliente.id else {
+            print("Erro: ID do cliente é nulo.")
+            completion(false)
+            return
+        }
+        
+        // Referência ao documento do feirante
+        let clienteRef = db.collection("clientes").document(clienteId)
+        
+        // Atualize os dados do feirante
+        clienteRef.updateData([
+            "nome": cliente.nome,
+            "email": cliente.email,
+            "telefone": cliente.telefone,
+            "predio": cliente.predio,
+            "apartamento": cliente.apartamento,
+        ]) { error in
+            if let error = error {
+                print("Erro ao atualizar o cliente: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Cliente atualizado com sucesso.")
+                completion(true)
+            }
+        }
+    }
+    
+    func fetchClienteWithId(id: String, completion: @escaping (Cliente?) -> Void) {
+        db.collection("clientes").document(id).getDocument { (documentSnapshot, error) in
+            if let error = error {
+                print("Erro ao buscar cliente: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+
+            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
+                print("Cliente não encontrado.")
+                completion(nil)
+                return
+            }
+
+            do {
+                let cliente = try documentSnapshot.data(as: Cliente.self)
+                completion(cliente)
+            } catch {
+                print("Erro ao decodificar cliente: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
+    
     //Funções Produtos ----------------------------------------------------------
     
     func criarProduto(product: Produto, completion: @escaping (Error?) -> Void) {
@@ -390,7 +468,7 @@ class ViewModel: ObservableObject {
         
         
         guard let produtoId = produto.id else {
-            print("Erro: ID do feirante é nulo.")
+            print("Erro: ID do produto é nulo.")
             completion(false)
             return
         }
@@ -415,6 +493,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
     
     //Funções Pedidos ------------------------------------------------------------------
     
@@ -472,7 +551,65 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
+    
+    func fetchPedidosDoFeirante(feiranteId: String, completion: @escaping (Bool) -> Void) {
+        db.collection("pedidos").whereField("feiranteId", isEqualTo: feiranteId).getDocuments() { [weak self] (querySnapshot, err) in
+            if let err = err {
+                print("Erro ao obter pedidos: \(err)")
+                completion(false)
+            } else {
+                var pedidosTemp: [Pedido] = []
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let pedido = Pedido(
+                        id: document.documentID,
+                        produtoId: data["produtoId"] as? String ?? "",
+                        produtoNome: data["produtoNome"] as? String ?? "",
+                        clienteId: data["clienteId"] as? String ?? "",
+                        feiranteId: data["feiranteId"] as? String ?? "",
+                        quantidade: data["quantidade"] as? Int ?? 0,
+                        observacao: data["observacao"] as? String ?? "",
+                        estado: data["estado"] as? Int ?? 0
+                    )
+                    pedidosTemp.append(pedido)
+                }
+                DispatchQueue.main.async {
+                    self?.pedidosFeirante = pedidosTemp
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    func editarPedido(pedido: Pedido, completion: @escaping (Bool) -> ()) {
+        
+        guard let pedidoId = pedido.id else {
+            print("Erro: ID do pedido é nulo.")
+            completion(false)
+            return
+        }
+        
+        // Referência ao documento do feirante
+        let pedidoRef = db.collection("pedidos").document(pedidoId)
+        
+        // Atualize os dados do feirante
+        pedidoRef.updateData([
+            "produtoNome": pedido.produtoNome,
+            "quantidade": pedido.quantidade,
+            "observacao": pedido.observacao,
+            "estado": pedido.estado,
+        ]) { error in
+            if let error = error {
+                print("Erro ao atualizar o pedido: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("Pedido atualizado com sucesso.")
+                completion(true)
+            }
+        }
+    }
+    
+    
     
 }
 

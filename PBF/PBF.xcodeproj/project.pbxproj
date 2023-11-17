@@ -17,6 +17,7 @@
 		3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */; };
 		3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */; };
 		3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */; };
+		3B2DFC672B079D9D00327BE4 /* EditarPedidoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */; };
 		3B4032D32AE69F910020EEF3 /* Feirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D22AE69F910020EEF3 /* Feirante.swift */; };
 		3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D42AE6A02E0020EEF3 /* Produto.swift */; };
 		3B4032D72AE6A0E70020EEF3 /* Pedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D62AE6A0E70020EEF3 /* Pedido.swift */; };
@@ -50,6 +51,7 @@
 		3B83F7652AD6D048004F4789 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7642AD6D048004F4789 /* FirebaseDatabaseSwift */; };
 		3B83F7672AD6D057004F4789 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7662AD6D057004F4789 /* FirebaseFirestore */; };
 		3B83F7692AD6D057004F4789 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B83F7682AD6D057004F4789 /* FirebaseFirestoreSwift */; };
+		3BA1E5BC2B0793C200713872 /* EditarPerfilClienteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1E5BB2B0793C200713872 /* EditarPerfilClienteView.swift */; };
 		3BBAB7982AD6CD4300C57128 /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3BBAB7972AD6CD4300C57128 /* Aptabase */; };
 		3BBAB79A2AD6CD5500C57128 /* Aptabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3BBAB7992AD6CD5500C57128 /* Aptabase */; };
 		3BBC10322B0629F10082B931 /* FazerPedidoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBC10312B0629F10082B931 /* FazerPedidoSheetView.swift */; };
@@ -76,6 +78,7 @@
 		3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeiranteView.swift; sourceTree = "<group>"; };
 		3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFeiraView.swift; sourceTree = "<group>"; };
+		3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarPedidoView.swift; sourceTree = "<group>"; };
 		3B4032D22AE69F910020EEF3 /* Feirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feirante.swift; sourceTree = "<group>"; };
 		3B4032D42AE6A02E0020EEF3 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
 		3B4032D62AE6A0E70020EEF3 /* Pedido.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedido.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		3B7570D22AB1EF750047FCE4 /* PBFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBFApp.swift; sourceTree = "<group>"; };
 		3B7570D62AB1EF760047FCE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B7570D92AB1EF760047FCE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3BA1E5BB2B0793C200713872 /* EditarPerfilClienteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarPerfilClienteView.swift; sourceTree = "<group>"; };
 		3BBC10312B0629F10082B931 /* FazerPedidoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FazerPedidoSheetView.swift; sourceTree = "<group>"; };
 		3BBC10332B064B7E0082B931 /* PedidoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoView.swift; sourceTree = "<group>"; };
 		3BBC10352B0653560082B931 /* CartSheetHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSheetHistoryView.swift; sourceTree = "<group>"; };
@@ -182,6 +186,15 @@
 				3BBC10372B0653590082B931 /* CartViews */,
 			);
 			path = FeirasViews;
+			sourceTree = "<group>";
+		};
+		3B2DFC652B079D8E00327BE4 /* PedidoViews */ = {
+			isa = PBXGroup;
+			children = (
+				3BE3165F2AE9298A00294EF9 /* PedidosView.swift */,
+				3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */,
+			);
+			path = PedidoViews;
 			sourceTree = "<group>";
 		};
 		3B4C846A2AE73DE600997209 /* Controller */ = {
@@ -283,6 +296,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3BA1E5BD2B07959D00713872 /* PerfilViews */ = {
+			isa = PBXGroup;
+			children = (
+				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
+				3BA1E5BB2B0793C200713872 /* EditarPerfilClienteView.swift */,
+			);
+			path = PerfilViews;
+			sourceTree = "<group>";
+		};
 		3BBC10372B0653590082B931 /* CartViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,7 +320,7 @@
 				3B4032DB2AE6B98C0020EEF3 /* CreateFeiranteAccountView.swift */,
 				3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */,
 				3BE316592AE8117B00294EF9 /* HomeViewFeirante.swift */,
-				3BE3165F2AE9298A00294EF9 /* PedidosView.swift */,
+				3B2DFC652B079D8E00327BE4 /* PedidoViews */,
 				3B59FA112AE9479D00AE5C72 /* ItensViews */,
 				3B7320FF2AFBC51900446266 /* PerfilFeiranteViews */,
 			);
@@ -312,7 +334,7 @@
 				3B17CE5D2AD6DDC300B8D895 /* LoginClientView.swift */,
 				3B4C84682AE6D84200997209 /* HomeViewCliente.swift */,
 				3B2AAEB02B055B670078F050 /* FeirasViews */,
-				3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */,
+				3BA1E5BD2B07959D00713872 /* PerfilViews */,
 			);
 			path = ClienteCiews;
 			sourceTree = "<group>";
@@ -429,6 +451,7 @@
 				3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */,
 				3B4C846C2AE73DF900997209 /* DataController.swift in Sources */,
 				3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */,
+				3B2DFC672B079D9D00327BE4 /* EditarPedidoView.swift in Sources */,
 				3BE3165A2AE8117B00294EF9 /* HomeViewFeirante.swift in Sources */,
 				3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */,
 				3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */,
@@ -438,6 +461,7 @@
 				3B17CE562AD6DD7C00B8D895 /* CartView.swift in Sources */,
 				3B61542F2B0626390024C6C7 /* FullItemClienteView.swift in Sources */,
 				3BE316602AE9298A00294EF9 /* PedidosView.swift in Sources */,
+				3BA1E5BC2B0793C200713872 /* EditarPerfilClienteView.swift in Sources */,
 				3B17CE5A2AD6DDA200B8D895 /* CreateClientAccountView.swift in Sources */,
 				3BE3165E2AE9272000294EF9 /* CheckBoxStyle.swift in Sources */,
 				3B17CE582AD6DD9000B8D895 /* ContentView.swift in Sources */,

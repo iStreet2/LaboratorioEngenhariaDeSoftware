@@ -48,13 +48,13 @@ struct FeirasView: View {
             }
             .onAppear{
                 vm.produtosLoaded = false
-                vm.pedidosLoaded = false
+                vm.pedidosClienteLoaded = false
             }
             .refreshable(action: {
                 vm.feirantesLoaded = false
                 vm.fetchFeirantes() { success in
                     if success {
-                        vm.pedidosLoaded = true
+                        vm.feirantesLoaded = true
                     }
                 }
             })

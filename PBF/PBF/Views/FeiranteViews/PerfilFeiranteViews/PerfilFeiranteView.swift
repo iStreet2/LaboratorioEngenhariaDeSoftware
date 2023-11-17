@@ -29,12 +29,15 @@ struct PerfilFeiranteView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                VStack() {
                     VStack(alignment:.leading){
                         Group{
-                            Text(vm.feiranteAtual.nome)
-                                .font(.system(size:24))
-                                .bold()
+                            HStack{
+                                Text(vm.feiranteAtual.nome)
+                                    .font(.system(size:24))
+                                    .bold()
+                                Spacer()
+                            }
                             Group{
                                 Text("Nome da barra: \(vm.feiranteAtual.nomeBanca == "" ? "Sua barraca ainda não possui um nome" : vm.feiranteAtual.nomeBanca )")
                                 
@@ -43,6 +46,8 @@ struct PerfilFeiranteView: View {
                                 
                             }
                             .foregroundColor(.gray)
+                            .multilineTextAlignment(.leading)
+                            .frame(alignment: .leading)
                         }
                         .padding(.vertical,5)
                     }

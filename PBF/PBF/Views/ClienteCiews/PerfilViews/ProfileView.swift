@@ -11,6 +11,7 @@ import CoreData
 struct ProfileView: View {
     
     @State var navigation = false
+    @State var sheet = false
     
     @EnvironmentObject var vm: ViewModel
     
@@ -31,15 +32,17 @@ struct ProfileView: View {
             ScrollView {
                 VStack (alignment:.leading){
                     Group{
-                        Text("\(vm.clienteAtual.nome == "" ? "Erro ao mostrar o nome" : vm.clienteAtual.nome)")
-                            .font(.system(size:24))
-                            .bold()
+                        HStack{
+                            Text("\(vm.clienteAtual.nome == "" ? "Erro ao mostrar o nome" : vm.clienteAtual.nome)")
+                                .font(.system(size:24))
+                                .bold()
+                            Spacer()
+                        }
                         Group{
-                            Text("Nome da barra: \(vm.feiranteAtual.nomeBanca == "" ? "Sua barraca ainda não possui um nome" : vm.feiranteAtual.nomeBanca )")
+                            Text("Prédio: \(vm.clienteAtual.predio == "" ? "Sua conta ainda não possui um prédio registrado" : vm.clienteAtual.predio)")
                             
-                            Text("Descrição: \(vm.feiranteAtual.descricao == "" ? "Sua barraca ainda não tem descrição" : vm.feiranteAtual.descricao)")
+                            Text("Apartamento: \(vm.clienteAtual.apartamento == "" ? "Sua conta ainda não tem apartamento registrado" : vm.clienteAtual.apartamento)")
                                 .font(.system(size: 16))
-                            
                         }
                         .foregroundColor(.gray)
                     }
@@ -58,7 +61,19 @@ struct ProfileView: View {
             }
             .navigationTitle("Perfil")
             .onAppear{
-                vm.pedidosLoaded = false
+                vm.pedidosClienteLoaded = false
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        sheet.toggle()
+                    }) {
+                        Text("Editar")
+                    }
+                }
+            }
+            .sheet(isPresented: $sheet) {
+                EditarPerfilClienteView()
             }
         }
         

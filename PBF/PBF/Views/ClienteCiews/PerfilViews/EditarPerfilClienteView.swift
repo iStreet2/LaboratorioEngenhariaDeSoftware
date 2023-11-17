@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditPerfilFeiranteView: View {
+struct EditarPerfilClienteView: View {
     
     @EnvironmentObject var vm: ViewModel
     @Environment(\.dismiss) var dismiss
@@ -15,19 +15,18 @@ struct EditPerfilFeiranteView: View {
     var body: some View {
         NavigationView{
             Form {
-                TextField("Nome", text: $vm.feiranteAtual.nome)
-                TextField("Email", text: $vm.feiranteAtual.email)
-                TextField("Telefone", text: $vm.feiranteAtual.telefone)
-                TextField("Nome da Barraca", text: $vm.feiranteAtual.nomeBanca)
-                TextField("Desrição da Barraca", text: $vm.feiranteAtual.descricao)
-                TextField("Tipos de Produto", text: $vm.feiranteAtual.tiposDeProduto)
+                TextField("Nome", text: $vm.clienteAtual.nome)
+                TextField("Email", text: $vm.clienteAtual.email)
+                TextField("Telefone", text: $vm.clienteAtual.telefone)
+                TextField("Prédio", text: $vm.clienteAtual.predio)
+                TextField("Apartamento", text: $vm.clienteAtual.apartamento)
             }
             .navigationTitle("Editar Perfil")
             .navigationBarItems(leading: Button("Cancelar") { dismiss() })
             .navigationBarItems(trailing:
                                     Button("Salvar") {
                 // Chamando a função editarProtudo
-                vm.editarFeirante(feirante: vm.feiranteAtual) { success in //Atualizo no banco de dados o que eu ja atualizei na minha ViewModel do feirante atual
+                vm.editarCliente(cliente: vm.clienteAtual) { success in //Atualizo no banco de dados o que eu ja atualizei na minha ViewModel do feirante atual
                     if success{
                         dismiss()
                     }else{
@@ -43,6 +42,6 @@ struct EditPerfilFeiranteView: View {
 
 
 #Preview {
-    EditPerfilFeiranteView()
+    EditarPerfilClienteView()
         .environmentObject(ViewModel())
 }

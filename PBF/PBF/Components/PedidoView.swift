@@ -11,6 +11,9 @@ struct PedidoView: View {
     var nome: String
     var estado: Int
     var quantidade: Int
+    var nomeCliente: String
+    var nomeFeirante: String
+    var tipo: Int
     
     
     var body: some View {
@@ -28,6 +31,18 @@ struct PedidoView: View {
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                 Spacer()
+            }
+            if tipo == 0{
+                Text("Feirante: \(nomeFeirante)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
+            }
+            if tipo == 1{
+                Text("Cliente: \(nomeCliente)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
             }
             Text("Preparo: \(estado == 0 ? "Em Preparo!" : estado == 1 ? "Pronto" : "Entregue")")
                 .font(.subheadline)
@@ -65,5 +80,5 @@ struct PedidoView: View {
 }
 
 #Preview {
-    PedidoView(nome: "Espetinho de Chocolate", estado: 3, quantidade: 1)
+    PedidoView(nome: "Espetinho de Chocolate", estado: 0, quantidade: 1, nomeCliente: "Paulo", nomeFeirante: "Alberto", tipo: 0)
 }

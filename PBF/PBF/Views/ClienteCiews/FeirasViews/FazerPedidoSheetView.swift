@@ -17,6 +17,7 @@ struct FazerPedidoSheetView: View {
     @State private var observacao: String = ""
     @State private var showError = false // Nova variável para mostrar erro
     @State private var notEnough = false
+    @State private var cantZero = false
     
     @State var f: Int //Indice do vetor do feirante
     @State var produto: Produto
@@ -35,8 +36,6 @@ struct FazerPedidoSheetView: View {
                             .keyboardType(.numberPad) // Teclado numérico para inserção da quantidade
                         TextField("Observação", text: $observacao)
                     }
-                    
-                    
                 }
                 if showError {
                     Text("Preencha o campo de quantidade!")
@@ -48,6 +47,10 @@ struct FazerPedidoSheetView: View {
                             .foregroundColor(.red)
                         Text("Quantidade disponível: \(produto.quantidade)")
                     }
+                }
+                if cantZero{
+                        Text("Você não pode pedir por 0 de quantidade!")
+                            .foregroundColor(.red)
                 }
             }
             .navigationTitle("Começar pedido!")
@@ -62,6 +65,10 @@ struct FazerPedidoSheetView: View {
                     notEnough = true
                     return
                 }
+                else if Int(quantidade) == 0{
+                    cantZero = true
+                    return
+                }
                 showError = false
                 withAnimation {
                     isLoading = true
@@ -71,7 +78,7 @@ struct FazerPedidoSheetView: View {
                 vm.addPedido(pedido: pedido) { success in
                     if success {
                         isSuccess = true
-                        produto.quantidade -= 1
+                        produto.quantidade -= Int(quantidade) ?? 0
                         vm.editarProduto(produto: produto) { _ in
                         }
                     } else {
