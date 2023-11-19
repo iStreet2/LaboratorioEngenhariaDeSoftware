@@ -26,11 +26,14 @@ struct PedidosView: View {
                                     .foregroundColor(.black)
                             })
                             .sheet(isPresented: $sheet2){
-                                EditarPedidoView(pedido:vm.pedidosFeirante[i])
+                                EditarPedidoSheetView(pedido:vm.pedidosFeirante[i])
                             }
                             .onAppear{
                                 vm.fetchClienteWithId(id: vm.pedidosFeirante[i].clienteId) { cliente in
                                     self.cliente = cliente ?? self.cliente
+                                    if vm.pedidosFeiranteLoaded{
+//                                        print(vm.produtos[i])
+                                    }
                                 }
                             }
                         }
@@ -47,6 +50,7 @@ struct PedidosView: View {
                 vm.fetchPedidosDoCliente(clienteId: vm.clienteAtual.id ?? "teste") { success in
                     if success {
                         vm.pedidosFeiranteLoaded = true
+                        
                     }
                 }
             })

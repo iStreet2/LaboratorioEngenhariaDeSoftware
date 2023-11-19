@@ -80,5 +80,5 @@ struct PedidoView: View {
 }
 
 #Preview {
-    PedidoView(nome: "Espetinho de Chocolate", estado: 0, quantidade: 1, nomeCliente: "Paulo", nomeFeirante: "Alberto", tipo: 0)
+    PedidoView(nome: "Espetinho de Chocolate", estado: 0, quantidade: 1, nomeCliente: "Paulo", nomeFeirante: "Alberto", tipo: 1)
 }

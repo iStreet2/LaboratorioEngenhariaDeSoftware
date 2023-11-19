@@ -42,6 +42,12 @@ struct ContentView: View {
                                     vm.fetchFeirante(email: feiranteEmail){ feirante in//Procuro no meu DataBase um feirante com o email que esta no coredata
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual //Aqui eu coloco meu feirante atual da ViewModel igual o feirante que eu achei no meu database baseado no email do CoreData
                                         vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){ _ in //Atualizo meu vetor de produtos local com o email do feirante que eu achei
+                                            //Atualizo também meus pedidos
+                                            vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste" ){ success in
+                                                if success{
+                                                    vm.pedidosFeiranteLoaded = true
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -67,6 +73,12 @@ struct ContentView: View {
                                         vm.fetchFeirantes(){ success in
                                             if success{
                                                 vm.feirantesLoaded = true
+                                            }
+                                        }
+                                        //Atualizo também meus pedidos
+                                        vm.fetchPedidosDoCliente(clienteId: vm.clienteAtual.id ?? "teste" ){ success in
+                                            if success{
+                                                vm.pedidosClienteLoaded = true
                                             }
                                         }
                                     }

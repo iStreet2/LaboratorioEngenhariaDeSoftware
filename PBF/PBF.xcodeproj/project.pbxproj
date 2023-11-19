@@ -17,7 +17,7 @@
 		3B17CE602AD6DDD100B8D895 /* LoginFeiranteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */; };
 		3B17CE622AD6DDEB00B8D895 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */; };
 		3B2AAEB22B055B7C0078F050 /* FullFeiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */; };
-		3B2DFC672B079D9D00327BE4 /* EditarPedidoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */; };
+		3B2DFC672B079D9D00327BE4 /* EditarPedidoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DFC662B079D9D00327BE4 /* EditarPedidoSheetView.swift */; };
 		3B4032D32AE69F910020EEF3 /* Feirante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D22AE69F910020EEF3 /* Feirante.swift */; };
 		3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D42AE6A02E0020EEF3 /* Produto.swift */; };
 		3B4032D72AE6A0E70020EEF3 /* Pedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4032D62AE6A0E70020EEF3 /* Pedido.swift */; };
@@ -78,7 +78,7 @@
 		3B17CE5F2AD6DDD100B8D895 /* LoginFeiranteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFeiranteView.swift; sourceTree = "<group>"; };
 		3B17CE612AD6DDEB00B8D895 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3B2AAEB12B055B7C0078F050 /* FullFeiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFeiraView.swift; sourceTree = "<group>"; };
-		3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarPedidoView.swift; sourceTree = "<group>"; };
+		3B2DFC662B079D9D00327BE4 /* EditarPedidoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarPedidoSheetView.swift; sourceTree = "<group>"; };
 		3B4032D22AE69F910020EEF3 /* Feirante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feirante.swift; sourceTree = "<group>"; };
 		3B4032D42AE6A02E0020EEF3 /* Produto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Produto.swift; sourceTree = "<group>"; };
 		3B4032D62AE6A0E70020EEF3 /* Pedido.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedido.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				3BE3165F2AE9298A00294EF9 /* PedidosView.swift */,
-				3B2DFC662B079D9D00327BE4 /* EditarPedidoView.swift */,
+				3B2DFC662B079D9D00327BE4 /* EditarPedidoSheetView.swift */,
 			);
 			path = PedidoViews;
 			sourceTree = "<group>";
@@ -451,7 +451,7 @@
 				3B4032D52AE6A02E0020EEF3 /* Produto.swift in Sources */,
 				3B4C846C2AE73DF900997209 /* DataController.swift in Sources */,
 				3B7570D32AB1EF750047FCE4 /* PBFApp.swift in Sources */,
-				3B2DFC672B079D9D00327BE4 /* EditarPedidoView.swift in Sources */,
+				3B2DFC672B079D9D00327BE4 /* EditarPedidoSheetView.swift in Sources */,
 				3BE3165A2AE8117B00294EF9 /* HomeViewFeirante.swift in Sources */,
 				3BE316642AE929C700294EF9 /* PerfilFeiranteView.swift in Sources */,
 				3B17CE4E2AD6DCD400B8D895 /* BarracaCard.swift in Sources */,

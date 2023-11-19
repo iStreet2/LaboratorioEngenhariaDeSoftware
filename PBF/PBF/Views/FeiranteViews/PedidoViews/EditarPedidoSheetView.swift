@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditarPedidoView: View {
+struct EditarPedidoSheetView: View {
     @EnvironmentObject var vm: ViewModel
     @Environment(\.dismiss) var dismiss
     @State var pedido: Pedido
@@ -51,12 +51,12 @@ struct EditarPedidoView: View {
             }
             )
         }
-        //        .onAppear{
-        //            self.quantidade = String(vm.produtos[i].quantidade)
-        //        }
+        .onAppear{
+            print("O ID DESSE PEDIDO É: \(pedido.id)")
+        }
     }
 }
 
 #Preview {
-    EditarPedidoView(pedido: ViewModel().pedidosFeirante[0])
+    EditarPedidoSheetView(pedido: ViewModel().pedidosFeirante[0])
 }
