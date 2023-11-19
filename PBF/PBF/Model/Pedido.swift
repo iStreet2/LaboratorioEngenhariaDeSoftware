@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseCore
 
-struct Pedido: Codable, Identifiable{
+struct Pedido: Codable, Identifiable, Hashable{
     var id: String?
     var produtoId: String
     var produtoNome: String

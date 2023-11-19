@@ -15,17 +15,19 @@ class ViewModel: ObservableObject {
     private var db = Firestore.firestore()
     
     //Variáveis de feirante
-    @Published var feiranteAtual: Feirante = Feirante(id: "eIGpjCOj6Qdmk0N0zk7o", nome: "Pobre", email: "", telefone: "", senha: "", nomeBanca: "Barraca do Pobre", tiposDeProduto: "", descricao: "Uma barraca humilde")
+    @Published var feiranteAtual: Feirante = Feirante(id: "eIGpjCOj6Qdmk0N0zk7o", nome: "Paulo", email: "", telefone: "", senha: "", nomeBanca: "Barraca do Paulo", tiposDeProduto: "", descricao: "Uma barraca humilde")
     @Published var pedidosFeirante: [Pedido] = [Pedido(produtoId: "4F054D8E-67DD-47EA-9A4E-8D6C1691BE0B", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
     @Published var pedidosFeiranteLoaded = false
+    @Published var clientesParaOsFeirantes:[Cliente] = [Cliente(nome: "Sabrina", email: "", telefone: "", senha: "", predio: "", apartamento: "")] //Variável para armazenar os clientes que fizeram pedidos, vai ser utilizada na PedidosView
     
     //Variáveis do cliente
-    @Published var clienteAtual: Cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
+    @Published var clienteAtual: Cliente = Cliente(nome: "Sabrina", email: "", telefone: "", senha: "", predio: "Boa Vista", apartamento: "104")
     @Published var feirantes: [Feirante] = [Feirante(nome: "Jorge", email: "a", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui! Alguma coisa para o texto"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!"),Feirante(nome: "Jorge", email: "jorge@gmail.com", telefone: "11 912345678", senha: "", nomeBanca: "Barraca do Seu Jorge", tiposDeProduto: "", descricao: "A melhor barraca que você encontrará por aqui!")]
     @Published var feirantesLoaded = false
     @Published var produtosLoaded = false
     @Published var pedidosClienteLoaded = false
     @Published var pedidosCliente: [Pedido] = [Pedido(produtoId: "0CC30D37-2411-48C1-9510-887F761ED2E3", produtoNome: "Espetinho de Chocolate", clienteId: "teste", feiranteId: "", quantidade: 1, observacao: "Bem doce!", estado: 0)]
+    @Published var feirantesParaOsCliente:[Feirante] = [] //Variável para armazenar os clientes que fizeram pedidos, vai ser utilizada na CartView
     
     //Variáveis para os dois
     @Published var produtos: [Produto] = [Produto(nome:"", preco: "", quantidade: 1, descricao: "", feiranteEmail: "")]
@@ -102,7 +104,8 @@ class ViewModel: ObservableObject {
             }
 
             do {
-                let feirante = try documentSnapshot.data(as: Feirante.self)
+                var feirante = try documentSnapshot.data(as: Feirante.self)
+                feirante.id = documentSnapshot.documentID // Adiciona o id ao feirante
                 completion(feirante)
             } catch {
                 print("Erro ao decodificar feirante: \(error.localizedDescription)")
@@ -264,7 +267,25 @@ class ViewModel: ObservableObject {
         }
     }
     
-    
+    func prepararFeirante(){
+        self.fetchProdutosDoFeirante(emailFeirante: self.feiranteAtual.email){ _ in //Atualizo meu vetor de produtos local com o email do feirante que eu achei
+            
+            //Atualizo também meus pedidos e meu vetor de clientes para o feirante atual, apenas os clientes que realizaram pedidos para esse feirante
+            
+            self.fetchPedidosDoFeirante(feiranteId: self.feiranteAtual.id ?? "teste" ){ success in
+                if success{
+                    // Inicializa o array para ter o mesmo tamanho de pedidosFeirante
+                    self.clientesParaOsFeirantes = Array(repeating: Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: ""), count: self.pedidosFeirante.count)
+                    for i in 0..<self.pedidosFeirante.count {
+                        self.fetchClienteWithId(id: self.pedidosFeirante[i].clienteId){ cliente in
+                            self.clientesParaOsFeirantes[i] = cliente ?? self.clienteAtual
+                        }
+                    }
+                    self.pedidosFeiranteLoaded = true
+                }
+            }
+        }
+    }
     
     //--------------------------------------------------------------------------------------------------------------
     //Funções de Clientes
@@ -442,11 +463,32 @@ class ViewModel: ObservableObject {
             }
 
             do {
-                let cliente = try documentSnapshot.data(as: Cliente.self)
+                var cliente = try documentSnapshot.data(as: Cliente.self)
+                cliente.id = documentSnapshot.documentID // Atribui manualmente o ID do documento
                 completion(cliente)
             } catch {
                 print("Erro ao decodificar cliente: \(error.localizedDescription)")
                 completion(nil)
+            }
+        }
+    }
+
+    func prepararCliente(){
+        self.fetchFeirantes(){ success in
+            if success{
+                self.feirantesLoaded = true
+            }
+        }
+        //Atualizo também meus pedidos e também meu vetor de feirantes para os clientes, mas apenas os feirantes que tem pedidos feito por esse cliente
+        self.fetchPedidosDoCliente(clienteId: self.clienteAtual.id ?? "teste" ){ success in
+            if success{
+                self.feirantesParaOsCliente = Array(repeating: Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: ""), count: self.pedidosCliente.count)
+                for i in 0..<self.pedidosCliente.count{
+                    self.fetchFeiranteWithId(id: self.pedidosCliente[i].feiranteId){ feirante in
+                        self.feirantesParaOsCliente[i] = feirante ?? self.feiranteAtual
+                    }
+                }
+                self.pedidosClienteLoaded = true
             }
         }
     }

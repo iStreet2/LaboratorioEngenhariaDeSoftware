@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct PedidosView: View {
     @EnvironmentObject var vm: ViewModel
-    @State var sheet = false
     @State var sheet2 = false
-    @State var cliente = Cliente(nome: "", email: "", telefone: "", senha: "", predio: "", apartamento: "")
+    @State private var selectedPedido: Pedido = Pedido(produtoId: "", produtoNome: "", clienteId: "", feiranteId: "", quantidade: 13, observacao: "", estado: 0)    
+    
+    //Coisa do CoreData
+    @Environment(\.managedObjectContext) var context //Contexto, DataController
+    
+    //Coisas do MyDataController
+    @ObservedObject var myDataController: MyDataController //acessar funcoes do meu CoreData
+    
+    @FetchRequest(sortDescriptors: []) var feiranteData: FetchedResults<FeiranteData> //Receber os dados salvos no CoreData
+    @FetchRequest(sortDescriptors: []) var clienteData: FetchedResults<ClienteData> //Receber os dados salvos no CoreData
+    
+    init(context: NSManagedObjectContext) {
+        self.myDataController = MyDataController(context: context)
+    }
     
     var body: some View {
         NavigationView {
@@ -20,21 +33,19 @@ struct PedidosView: View {
                     ForEach(0 ..< vm.pedidosFeirante.count, id: \.self){ i in
                         if vm.pedidosFeiranteLoaded {
                             Button(action: {
+                                selectedPedido = vm.pedidosFeirante[i]
+                                vm.clienteAtual = vm.clientesParaOsFeirantes[i]
                                 sheet2.toggle()
                             }, label: {
-                                PedidoView(nome: vm.pedidosFeirante[i].produtoNome, estado: vm.pedidosFeirante[i].estado, quantidade: vm.pedidosFeirante[i].quantidade, nomeCliente: cliente.nome, nomeFeirante: vm.feiranteAtual.nome, tipo: 1)
-                                    .foregroundColor(.black)
+                                if vm.pedidosFeirante[i].estado != 3{
+                                    PedidoView(pedido: vm.pedidosFeirante[i], cliente: vm.clientesParaOsFeirantes[i], feirante: vm.feiranteAtual, tipo: 1)
+                                        .foregroundColor(.black)
+                                }
                             })
                             .sheet(isPresented: $sheet2){
-                                EditarPedidoSheetView(pedido:vm.pedidosFeirante[i])
-                            }
-                            .onAppear{
-                                vm.fetchClienteWithId(id: vm.pedidosFeirante[i].clienteId) { cliente in
-                                    self.cliente = cliente ?? self.cliente
-                                    if vm.pedidosFeiranteLoaded{
-//                                        print(vm.produtos[i])
-                                    }
-                                }
+                                EditarPedidoSheetView(context: context,pedido: $selectedPedido)
+                            }.onAppear{
+                                print("\(vm.clientesParaOsFeirantes[i])")
                             }
                         }
                     }
@@ -47,7 +58,7 @@ struct PedidosView: View {
             }
             .refreshable(action: {
                 vm.pedidosFeiranteLoaded = false
-                vm.fetchPedidosDoCliente(clienteId: vm.clienteAtual.id ?? "teste") { success in
+                vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste") { success in
                     if success {
                         vm.pedidosFeiranteLoaded = true
                         
@@ -55,34 +66,13 @@ struct PedidosView: View {
                 }
             })
             .navigationTitle("Pedidos")
-            .onAppear{
-                vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste" ){ success in
-                    if success{
-                        vm.pedidosFeiranteLoaded = true
-                    }
-                }
-                //Pegar o nome do cliente
-                
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        sheet.toggle()
-                    }) {
-                        Image(systemName: "arrow.circlepath")
-                    }
-                }
-            }
-            .sheet(isPresented: $sheet){
-                CartSheetHistoryView()
-            }
             
         }
-
+        
     }
 }
 
 #Preview {
-    PedidosView()
+    PedidosView(context: DataController().container.viewContext)
         .environmentObject(ViewModel())
 }

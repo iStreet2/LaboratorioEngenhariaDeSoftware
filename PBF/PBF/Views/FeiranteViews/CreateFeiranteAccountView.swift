@@ -95,6 +95,8 @@ struct CreateFeiranteAccountView: View {
                                     
                                     vm.feiranteAtual = feirante
                                     
+                                    
+                                    
                                     vm.addFeirante(feirante: feirante) { success in
                                         if success {
                                             withAnimation {
@@ -106,6 +108,12 @@ struct CreateFeiranteAccountView: View {
                                             }
                                         }
                                     }
+                                    
+                                    vm.fetchFeirante(email: vm.feiranteAtual.email){ feirante in
+                                        vm.feiranteAtual = feirante ?? vm.feiranteAtual
+                                    }
+                                    
+                                    vm.prepararFeirante()
                                 }
                                 .buttonStyle(PBFButtonSyle())
                             }

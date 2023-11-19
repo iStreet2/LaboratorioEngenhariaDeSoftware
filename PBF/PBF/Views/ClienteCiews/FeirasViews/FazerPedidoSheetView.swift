@@ -59,13 +59,19 @@ struct FazerPedidoSheetView: View {
                                     Button(action: {
                 if quantidade.isEmpty {
                     showError = true
+                    notEnough = false
+                    cantZero = false
                     return
                 }
                 else if Int(quantidade) ?? 0 > produto.quantidade{
+                    showError = false
                     notEnough = true
+                    cantZero = false
                     return
                 }
                 else if Int(quantidade) == 0{
+                    showError = false
+                    notEnough = false
                     cantZero = true
                     return
                 }
@@ -79,6 +85,7 @@ struct FazerPedidoSheetView: View {
                     if success {
                         isSuccess = true
                         produto.quantidade -= Int(quantidade) ?? 0
+                        vm.prepararCliente()
                         vm.editarProduto(produto: produto) { _ in
                         }
                     } else {

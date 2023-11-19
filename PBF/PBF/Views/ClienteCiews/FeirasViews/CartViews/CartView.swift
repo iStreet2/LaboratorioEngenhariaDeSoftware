@@ -10,8 +10,6 @@ import SwiftUI
 struct CartView: View {
     @EnvironmentObject var vm: ViewModel
     @State var sheet = false
-    
-    @State var feirante: Feirante = Feirante(nome: "", email: "", telefone: "", senha: "", nomeBanca: "", tiposDeProduto: "", descricao: "")
 
     
     var body: some View {
@@ -19,13 +17,8 @@ struct CartView: View {
             ScrollView {
                 VStack{
                     ForEach(0 ..< vm.pedidosCliente.count, id: \.self){ i in
-                        if vm.pedidosClienteLoaded {
-                            PedidoView(nome: vm.pedidosCliente[i].produtoNome, estado: vm.pedidosCliente[i].estado, quantidade: vm.pedidosCliente[i].quantidade, nomeCliente: vm.clienteAtual.nome, nomeFeirante: feirante.nome, tipo: 0)
-                                .onAppear{
-                                    vm.fetchFeiranteWithId(id: vm.pedidosCliente[i].feiranteId) { feirante in
-                                        self.feirante = feirante ?? self.feirante
-                                    }
-                                }
+                        if vm.pedidosClienteLoaded && vm.pedidosCliente[i].estado != 2{
+                            PedidoView(pedido: vm.pedidosCliente[i], cliente: vm.clienteAtual, feirante: vm.feirantesParaOsCliente[i], tipo: 0)
                         }
                     }
                     if !vm.pedidosClienteLoaded{

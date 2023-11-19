@@ -8,49 +8,46 @@
 import SwiftUI
 
 struct PedidoView: View {
-    var nome: String
-    var estado: Int
-    var quantidade: Int
-    var nomeCliente: String
-    var nomeFeirante: String
+    var pedido: Pedido
+    var cliente: Cliente
+    var feirante: Feirante
     var tipo: Int
-    
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
-                Text(nome)
+                Text(pedido.produtoNome)
                     .frame(alignment: .leading)
                     .bold()
                     .padding(.bottom)
                 Spacer()
             }
             HStack{
-                Text("Quantidade requisitada: \(quantidade)")
+                Text("Quantidade requisitada: \(pedido.quantidade)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
                 Spacer()
             }
             if tipo == 0{
-                Text("Feirante: \(nomeFeirante)")
+                Text("Feirante: \(feirante.nome)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
             }
             if tipo == 1{
-                Text("Cliente: \(nomeCliente)")
+                Text("Cliente: \(cliente.nome)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .multilineTextAlignment(.leading)
             }
-            Text("Preparo: \(estado == 0 ? "Em Preparo!" : estado == 1 ? "Pronto" : "Entregue")")
+            Text("Preparo: \(pedido.estado == 0 ? "Em Preparo!" : pedido.estado == 1 ? "Pronto" : "Entregue")")
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.leading)
             
             ZStack{
-                if estado == 0{
+                if pedido.estado == 0{
                     HStack{
                         RoundedRectangle(cornerRadius:10)
                             .frame(width: 340/2, height: 20)
@@ -58,7 +55,7 @@ struct PedidoView: View {
                         Spacer()
                     }
                     
-                }else if estado == 1{
+                }else if pedido.estado == 1{
                     RoundedRectangle(cornerRadius:10)
                         .frame(width: 340, height: 20)
                         .foregroundColor(.green)
@@ -78,7 +75,7 @@ struct PedidoView: View {
         .padding([.top, .horizontal])
     }
 }
-
-#Preview {
-    PedidoView(nome: "Espetinho de Chocolate", estado: 0, quantidade: 1, nomeCliente: "Paulo", nomeFeirante: "Alberto", tipo: 1)
-}
+//
+//#Preview {
+//    PedidoView(nome: "Espetinho de Chocolate", estado: 0, quantidade: 1, nomeCliente: "Paulo", nomeFeirante: "Alberto", tipo: 1)
+//}

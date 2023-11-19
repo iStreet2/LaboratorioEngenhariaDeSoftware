@@ -40,15 +40,10 @@ struct ContentView: View {
                             .onAppear{
                                 if let feiranteEmail = myDataController.getEmailFeirante() { //Coloco  meu feirante atual o que esta logando direto
                                     vm.fetchFeirante(email: feiranteEmail){ feirante in//Procuro no meu DataBase um feirante com o email que esta no coredata
+                                        
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual //Aqui eu coloco meu feirante atual da ViewModel igual o feirante que eu achei no meu database baseado no email do CoreData
-                                        vm.fetchProdutosDoFeirante(emailFeirante: vm.feiranteAtual.email){ _ in //Atualizo meu vetor de produtos local com o email do feirante que eu achei
-                                            //Atualizo também meus pedidos
-                                            vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste" ){ success in
-                                                if success{
-                                                    vm.pedidosFeiranteLoaded = true
-                                                }
-                                            }
-                                        }
+                                        
+                                        vm.prepararFeirante()
                                     }
                                     
                                 } else {
@@ -69,18 +64,9 @@ struct ContentView: View {
                             .onAppear{
                                 if let clienteEmail = myDataController.getEmailCliente() {
                                     vm.fetchCliente(email: clienteEmail) { cliente in
-                                        vm.clienteAtual = cliente ?? vm.clienteAtual
-                                        vm.fetchFeirantes(){ success in
-                                            if success{
-                                                vm.feirantesLoaded = true
-                                            }
-                                        }
-                                        //Atualizo também meus pedidos
-                                        vm.fetchPedidosDoCliente(clienteId: vm.clienteAtual.id ?? "teste" ){ success in
-                                            if success{
-                                                vm.pedidosClienteLoaded = true
-                                            }
-                                        }
+                                        vm.clienteAtual = cliente ?? vm.clienteAtual //Defino meu cliente atual na viewModel o mesmo cliente que esta no meu banco de dados com o email salvo no CoreData
+
+                                        vm.prepararCliente()
                                     }
                                 } else {
                                     print("Nenhum email de feirante encontrado no CoreData.")

@@ -106,10 +106,10 @@ struct LoginFeiranteView: View {
                                     wrongPass = false
                                     vm.fetchFeirante(email:loginInput){feirante in
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual
-                                    }
-                                    vm.fetchProdutosDoFeirante(emailFeirante: loginInput){ _ in
+                                        vm.prepararFeirante()
                                     }
                                 }
+                                
                                 vm.getFeiranteID(email: loginInput) { feiranteID in
                                     if let id = feiranteID {
                                         // Salvar os detalhes no CoreData

@@ -25,7 +25,7 @@ struct HomeViewFeirante: View {
     
     var body: some View {
         TabView {
-            PedidosView()
+            PedidosView(context: context)
                 .tabItem {
                     Label("Pedidos", systemImage: "list.clipboard")
                 }

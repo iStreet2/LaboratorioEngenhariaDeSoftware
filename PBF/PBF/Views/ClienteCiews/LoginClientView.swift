@@ -111,12 +111,11 @@ struct LoginClientView: View {
                                     wrongPass = false
                                     vm.fetchCliente(email: loginInput){ cliente in
                                         vm.clienteAtual = cliente ?? vm.clienteAtual
+                                        vm.prepararCliente()
                                     }
                                     vm.fetchFeirantes(){ success in
                                         vm.feirantesLoaded = true
                                     }
-                                    
-                                    //Adiciono todos os feirantes do banco de dados para o cliente fer as barracas
                                 }
                                 
                                 

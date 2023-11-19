@@ -104,6 +104,7 @@ struct CreateClientAccountView: View {
                                     let cliente = Cliente(nome: nameInput, email: emailInput, telefone: "", senha: passInput, predio: apInput, apartamento: buildingInput)
                                     
                                     vm.clienteAtual = cliente
+                                    
                                     vm.fetchFeirantes(){success in
                                         vm.feirantesLoaded = true
                                     }
@@ -119,6 +120,12 @@ struct CreateClientAccountView: View {
                                         }
                                     }
                                     
+                                    vm.fetchCliente(email: vm.clienteAtual.email){ cliente in
+                                        vm.clienteAtual = cliente ?? vm.clienteAtual
+                                    }
+                                    
+                                    
+                                    vm.prepararCliente()
                                     // Simulando sucesso após 2 segundos
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                                         withAnimation {
