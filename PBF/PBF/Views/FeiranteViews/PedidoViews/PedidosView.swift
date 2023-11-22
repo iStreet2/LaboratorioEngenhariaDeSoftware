@@ -58,6 +58,7 @@ struct PedidosView: View {
             }
             .refreshable(action: {
                 vm.pedidosFeiranteLoaded = false
+                vm.prepararFeirante()
                 vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste") { success in
                     if success {
                         vm.pedidosFeiranteLoaded = true

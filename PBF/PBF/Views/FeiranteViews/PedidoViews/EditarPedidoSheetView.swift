@@ -41,10 +41,21 @@ struct EditarPedidoSheetView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
                     
-                    Text("Status selecionado: \(statusOptions[pedido.estado])")
+                    
+                    Text("Status selecionado: ")
+                        .bold()
+                    + Text("\(statusOptions[pedido.estado])")
                     
                     
+                    Text("Observação do Cliente: ")
+                        .bold()
+                        .padding(.top)
+                    Text("\(pedido.observacao)")
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal,85)
                 }
+                
+                
                 VStack(alignment:.leading){
                     Text("Perfil do cliente:")
                         .font(.title)

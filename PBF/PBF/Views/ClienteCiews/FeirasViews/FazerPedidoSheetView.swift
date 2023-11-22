@@ -20,7 +20,7 @@ struct FazerPedidoSheetView: View {
     @State private var cantZero = false
     
     @State var f: Int //Indice do vetor do feirante
-    @State var produto: Produto
+    @State var p: Int
     
     @Environment(\.dismiss) var dismiss
     
@@ -45,7 +45,7 @@ struct FazerPedidoSheetView: View {
                     VStack{
                         Text("Não há essa quantidade disponível no momento!")
                             .foregroundColor(.red)
-                        Text("Quantidade disponível: \(produto.quantidade)")
+                        Text("Quantidade disponível: \(vm.produtos[p].quantidade)")
                     }
                 }
                 if cantZero{
@@ -63,7 +63,7 @@ struct FazerPedidoSheetView: View {
                     cantZero = false
                     return
                 }
-                else if Int(quantidade) ?? 0 > produto.quantidade{
+                else if Int(quantidade) ?? 0 > vm.produtos[p].quantidade{
                     showError = false
                     notEnough = true
                     cantZero = false
@@ -79,14 +79,14 @@ struct FazerPedidoSheetView: View {
                 withAnimation {
                     isLoading = true
                 }
-                let pedido = Pedido(produtoId: produto.id!, produtoNome: produto.nome, clienteId: vm.clienteAtual.id!, feiranteId: vm.feirantes[f].id!, quantidade: Int(quantidade) ?? 0, observacao: observacao, estado: 0)
+                let pedido = Pedido(produtoId: vm.produtos[p].id!, produtoNome: vm.produtos[p].nome, clienteId: vm.clienteAtual.id!, feiranteId: vm.feirantes[f].id!, quantidade: Int(quantidade) ?? 0, observacao: observacao, estado: 0)
                 
                 vm.addPedido(pedido: pedido) { success in
                     if success {
                         isSuccess = true
-                        produto.quantidade -= Int(quantidade) ?? 0
+                        vm.produtos[p].quantidade -= Int(quantidade) ?? 0
                         vm.prepararCliente()
-                        vm.editarProduto(produto: produto) { _ in
+                        vm.editarProduto(produto: vm.produtos[p]) { _ in
                         }
                     } else {
                         isLoading = false
@@ -118,5 +118,5 @@ struct FazerPedidoSheetView: View {
 }
 
 #Preview {
-    FazerPedidoSheetView(f: 0, produto: ViewModel().produtos[0])
+    FazerPedidoSheetView(f: 0, p: 0)
 }

@@ -37,7 +37,7 @@ struct FullFeiraView: View {
                         ForEach(0 ..< vm.produtos.count, id: \.self) { p in
                             NavigationLink {
                                 VStack{
-                                    FullItemClienteView(f: f, produto: vm.produtos[p])
+                                    FullItemClienteView(f: f, p: p)
                                 }
                             } label: {
                                 if vm.produtosLoaded{

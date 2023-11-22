@@ -11,7 +11,7 @@ struct FullItemClienteView: View {
     @EnvironmentObject var vm: ViewModel
     @State var isShowingSheet = false
     @State var f: Int //Indice do vetor do feirante
-    @State var produto: Produto 
+    @State var p: Int
     
     var body: some View {
         ScrollView{
@@ -24,7 +24,7 @@ struct FullItemClienteView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text(produto.nome)
+                        Text(vm.produtos[p].nome)
                             .font(.title2)
                         
                         HStack{
@@ -33,7 +33,7 @@ struct FullItemClienteView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text(produto.descricao)
+                        Text(vm.produtos[p].descricao)
                             .font(.title2)
                         HStack{
                             Text("Preço:")
@@ -41,7 +41,7 @@ struct FullItemClienteView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text("R$ \(produto.preco)")
+                        Text("R$ \(vm.produtos[p].preco)")
                             .font(.title2)
                         HStack{
                             Text("Quantidade disponível:")
@@ -49,7 +49,7 @@ struct FullItemClienteView: View {
                                 .bold()
                             Spacer()
                         }
-                        Text("\(produto.quantidade)")
+                        Text("\(vm.produtos[p].quantidade)")
                             .font(.title2)
                     }
                 }
@@ -68,7 +68,7 @@ struct FullItemClienteView: View {
             .buttonStyle(PBFButtonSyle())
         }
         .sheet(isPresented: $isShowingSheet) {
-            FazerPedidoSheetView(f: f, produto: produto)
+            FazerPedidoSheetView(f: f, p: p)
         }
         .onAppear{
             vm.produtosLoaded = false
@@ -79,6 +79,6 @@ struct FullItemClienteView: View {
 
 
 #Preview {
-    FullItemClienteView(f: 0, produto: ViewModel().produtos[0])
+    FullItemClienteView(f: 0, p: 0)
         .environmentObject(ViewModel())
 }

@@ -51,6 +51,7 @@ struct FeirasView: View {
                 vm.pedidosClienteLoaded = false
             }
             .refreshable(action: {
+                vm.prepararCliente()
                 vm.feirantesLoaded = false
                 vm.fetchFeirantes() { success in
                     if success {
