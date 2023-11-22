@@ -94,13 +94,18 @@ struct CreateFeiranteAccountView: View {
                                     let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "")
                                     
                                     vm.feiranteAtual = feirante
-                                    
-                                    
-                                    
+                                                                        
                                     vm.addFeirante(feirante: feirante) { success in
                                         if success {
                                             withAnimation {
                                                 isSuccess = true
+                                            }
+                                            vm.fetchFeirante(email: emailInput){ feiranteComId in
+                                                print("COISAS AQUII!!!!!:")
+                                                print(feiranteComId)
+                                                vm.feiranteAtual = feiranteComId ?? vm.feiranteAtual
+                                                vm.prepararFeirante()
+                                                print("\(vm.feiranteAtual.id ?? "nao tem id")")
                                             }
                                         } else {
                                             withAnimation {
@@ -109,11 +114,9 @@ struct CreateFeiranteAccountView: View {
                                         }
                                     }
                                     
-                                    vm.fetchFeirante(email: vm.feiranteAtual.email){ feirante in
-                                        vm.feiranteAtual = feirante ?? vm.feiranteAtual
-                                    }
                                     
-                                    vm.prepararFeirante()
+                                    
+                                    
                                 }
                                 .buttonStyle(PBFButtonSyle())
                             }
