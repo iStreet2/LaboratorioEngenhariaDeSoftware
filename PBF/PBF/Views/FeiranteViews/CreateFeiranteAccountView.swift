@@ -13,6 +13,9 @@ struct CreateFeiranteAccountView: View {
     @State var emailInput: String = ""
     @State var cpfInput: String = ""
     @State var passInput: String = ""
+    @State var nomeBarraca: String = ""
+    @State var descricaoBarraca: String = ""
+    @State var tiposDeProduto: String = ""
     @State var errorMessage: String = ""
     
     //Variaveis para a animacao do botao
@@ -66,6 +69,28 @@ struct CreateFeiranteAccountView: View {
                                 RoundedRectangle(cornerRadius: 15)
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
+                        Text("Nome da Barraca")
+                        TextField("", text: $nomeBarraca)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
+                        Text("Descrição da barraca")
+                        TextField("", text: $descricaoBarraca)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
+                        Text("Tipos de produto")
+                        TextField("", text: $tiposDeProduto)
+                            .padding()
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black, lineWidth: 0.5)
+                            )
+                        
                     }
                     .padding()
                     Spacer()
@@ -91,7 +116,7 @@ struct CreateFeiranteAccountView: View {
                                         isLoading = true
                                     }
                                     
-                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: "", tiposDeProduto: "", descricao: "")
+                                    let feirante = Feirante(nome: nameInput, email: emailInput, telefone: "", senha: passInput, nomeBanca: nomeBarraca, tiposDeProduto: tiposDeProduto, descricao: descricaoBarraca)
                                     
                                     vm.feiranteAtual = feirante
                                                                         
@@ -101,11 +126,8 @@ struct CreateFeiranteAccountView: View {
                                                 isSuccess = true
                                             }
                                             vm.fetchFeirante(email: emailInput){ feiranteComId in
-                                                print("COISAS AQUII!!!!!:")
-                                                print(feiranteComId)
                                                 vm.feiranteAtual = feiranteComId ?? vm.feiranteAtual
-                                                vm.prepararFeirante()
-                                                print("\(vm.feiranteAtual.id ?? "nao tem id")")
+                                                vm.prepararFeirante(){ _ in}
                                             }
                                         } else {
                                             withAnimation {

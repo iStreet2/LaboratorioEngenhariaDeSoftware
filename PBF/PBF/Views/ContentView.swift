@@ -43,7 +43,7 @@ struct ContentView: View {
                                         
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual //Aqui eu coloco meu feirante atual da ViewModel igual o feirante que eu achei no meu database baseado no email do CoreData
                                         
-                                        vm.prepararFeirante()
+                                        vm.prepararFeirante() { _ in}
                                     }
                                     
                                 } else {

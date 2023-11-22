@@ -11,7 +11,7 @@ import CoreData
 struct PedidosView: View {
     @EnvironmentObject var vm: ViewModel
     @State var sheet2 = false
-    @State private var selectedPedido: Pedido = Pedido(produtoId: "", produtoNome: "", clienteId: "", feiranteId: "", quantidade: 13, observacao: "", estado: 0)    
+    @State private var selectedPedido: Pedido = Pedido(produtoId: "", produtoNome: "", clienteId: "", feiranteId: "", quantidade: 13, observacao: "", estado: 0)
     
     //Coisa do CoreData
     @Environment(\.managedObjectContext) var context //Contexto, DataController
@@ -57,12 +57,13 @@ struct PedidosView: View {
                 }
             }
             .refreshable(action: {
-                vm.pedidosFeiranteLoaded = false
-                vm.prepararFeirante()
-                vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste") { success in
-                    if success {
-                        vm.pedidosFeiranteLoaded = true
-                        
+                vm.prepararFeirante(){ success in
+                    vm.pedidosFeiranteLoaded = false
+                    
+                    vm.fetchPedidosDoFeirante(feiranteId: vm.feiranteAtual.id ?? "teste") { success in
+                        if success {
+                            vm.pedidosFeiranteLoaded = true
+                        }
                     }
                 }
             })

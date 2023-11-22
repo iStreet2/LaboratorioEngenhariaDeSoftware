@@ -106,7 +106,7 @@ struct LoginFeiranteView: View {
                                     wrongPass = false
                                     vm.fetchFeirante(email:loginInput){feirante in
                                         vm.feiranteAtual = feirante ?? vm.feiranteAtual
-                                        vm.prepararFeirante()
+                                        vm.prepararFeirante() { _ in}
                                     }
                                 }
                                 

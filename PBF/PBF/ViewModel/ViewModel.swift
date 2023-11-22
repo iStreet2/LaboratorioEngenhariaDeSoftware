@@ -267,7 +267,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func prepararFeirante(){
+    func prepararFeirante(completion: @escaping (Bool) -> Void){
         self.fetchProdutosDoFeirante(emailFeirante: self.feiranteAtual.email){ _ in //Atualizo meu vetor de produtos local com o email do feirante que eu achei
             
             //Atualizo também meus pedidos e meu vetor de clientes para o feirante atual, apenas os clientes que realizaram pedidos para esse feirante
@@ -282,6 +282,9 @@ class ViewModel: ObservableObject {
                         }
                     }
                     self.pedidosFeiranteLoaded = true
+                    completion(true)
+                }else{
+                    completion(false)
                 }
             }
         }
