@@ -55,10 +55,21 @@ struct FullFeiraView: View {
         }
         .navigationTitle("\(vm.feirantes[f].nomeBanca == "" ? "Essa barraca ainda não possui um nome" : vm.feirantes[f].nomeBanca)")
         .onAppear{
+            if !vm.produtosLoaded{
+                vm.fetchProdutosDoFeirante(emailFeirante: vm.feirantes[f].email){ success in
+                    if success{
+                        vm.produtosLoaded = true
+                    }
+                }
+            }
+        }
+        .refreshable {
+            vm.produtosLoaded = false
             vm.fetchProdutosDoFeirante(emailFeirante: vm.feirantes[f].email){ success in
                 if success{
                     vm.produtosLoaded = true
                 }
+                
             }
         }
         

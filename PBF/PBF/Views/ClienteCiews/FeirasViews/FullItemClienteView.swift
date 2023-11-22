@@ -70,9 +70,6 @@ struct FullItemClienteView: View {
         .sheet(isPresented: $isShowingSheet) {
             FazerPedidoSheetView(f: f, p: p)
         }
-        .onAppear{
-            vm.produtosLoaded = false
-        }
     }
         
 }
