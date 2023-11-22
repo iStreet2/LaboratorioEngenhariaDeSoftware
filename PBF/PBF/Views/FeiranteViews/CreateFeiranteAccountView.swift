@@ -70,6 +70,7 @@ struct CreateFeiranteAccountView: View {
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
                         Text("Nome da Barraca")
+                            .foregroundStyle(.gray)
                         TextField("", text: $nomeBarraca)
                             .padding()
                             .overlay(
@@ -77,6 +78,7 @@ struct CreateFeiranteAccountView: View {
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
                         Text("Descrição da barraca")
+                            .foregroundStyle(.gray)
                         TextField("", text: $descricaoBarraca)
                             .padding()
                             .overlay(
@@ -84,6 +86,7 @@ struct CreateFeiranteAccountView: View {
                                     .stroke(Color.black, lineWidth: 0.5)
                             )
                         Text("Tipos de produto")
+                            .foregroundStyle(.gray)
                         TextField("", text: $tiposDeProduto)
                             .padding()
                             .overlay(
